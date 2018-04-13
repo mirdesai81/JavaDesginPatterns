@@ -64,7 +64,7 @@ public class Duplicates {
         List<Integer> input = new ArrayList<>(Arrays.asList(2,3,5,5,7,11,11,11,13));
         System.out.println(deleteDuplicates(input));
 
-       /* input = new ArrayList<>(Arrays.asList(2,3,5,5,7,11,11,11,13));
+        input = new ArrayList<>(Arrays.asList(2,3,5,5,7,11,11,11,13));
         System.out.println(deleteElement(input,5));
 
         input = new ArrayList<>(Arrays.asList(12,13,7,5,7,11,5,11,5));
@@ -72,7 +72,7 @@ public class Duplicates {
 
         input = new ArrayList<>(Arrays.asList(2,3,7,7,11,11,13));
         System.out.println(deleteElement(input,5));
-*/
+
         input = new ArrayList<>(Arrays.asList(2,3,5,5,5,7,11,11,11,13));
         System.out.println(limitDuplicatesInSortedArray(input,1));
 
