@@ -113,7 +113,7 @@ public class LinkedStack<T extends Comparable<T>> implements Iterable<T> {
             tail.setNext(newest);
         }
         tail = newest;
-
+        n = n + 1;
         return Last();
     }
 
@@ -128,6 +128,8 @@ public class LinkedStack<T extends Comparable<T>> implements Iterable<T> {
             return;
         }
 
+        prev = curr;
+        curr = curr.getNext();
         // move to next and keep track of prev untill element is not found
         while(curr != null && curr.getItem().compareTo(item) != 0) {
             prev = curr;
@@ -261,6 +263,26 @@ public class LinkedStack<T extends Comparable<T>> implements Iterable<T> {
         return tail.getItem();
     }
 
+
+    public boolean search(T key) {
+        if(isEmpty()) {
+           /* throw new NoSuchElementException("List is empty");*/
+            return false;
+        }
+
+        Node curr = head;
+        while(curr != null && curr.getItem().compareTo(key) != 0) {
+            curr = curr.getNext();
+        }
+
+        if(curr == null) {
+            return false;
+        }
+
+        return true;
+    }
+
+
     public String toString() {
         StringBuilder s = new StringBuilder();
         for(T item : this) {
@@ -311,6 +333,8 @@ public class LinkedStack<T extends Comparable<T>> implements Iterable<T> {
         }
     }
 
+
+
     public static void main(String args[]) {
         LinkedStack<Integer> linkedStack = new LinkedStack<>();
         linkedStack.addFirst(5);
@@ -357,6 +381,14 @@ public class LinkedStack<T extends Comparable<T>> implements Iterable<T> {
         linkedStack.print("After removing last" +
                 "" +
                 "");
+
+
+        linkedStack = new LinkedStack<>();
+        linkedStack.addFirst(5);
+        linkedStack.addFirst(4);
+        linkedStack.addFirst(3);
+        linkedStack.addFirst(2);
+        System.out.println(linkedStack.search(3));
     }
 
 }
