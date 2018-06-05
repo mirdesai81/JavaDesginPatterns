@@ -1,4 +1,6 @@
-package com.java.algorithm;
+package com.java.algorithm.stack;
+
+import com.java.algorithm.stack.ResizingArrayStack;
 
 import java.util.Arrays;
 
@@ -22,11 +24,28 @@ public class ArrayStackTest {
         valid = "{a}{b}({ab}]";
         System.out.println("Expression is matched for " + valid + " - "+isMatched(valid));
 
-        String html = "<html><body><h1>This is a h1</h1><h2>This is h2</h2></body></html>";
+      /*  String html = "<html><body><h1>This is a h1</h1><h2>This is h2</h2></body></html>";
         System.out.println("Valid HTML - "+isHTMLMatched(html));
 
         html = "<html><body><h1>This is a h1</h1><h2>This is h2</body></html>";
-        System.out.println("Valid HTML - "+isHTMLMatched(html));
+        System.out.println("Valid HTML - "+isHTMLMatched(html));*/
+
+        MaxStack maxStack = new MaxStack();
+        maxStack.push(2);
+        maxStack.push(2);
+        maxStack.push(1);
+        maxStack.push(4);
+        maxStack.push(5);
+        maxStack.push(5);
+        maxStack.push(3);
+        maxStack.pop();
+        System.out.println("max - "+maxStack.max());
+        maxStack.pop();
+        maxStack.pop();
+        System.out.println("max - "+maxStack.max());
+        maxStack.pop();
+        maxStack.pop();
+        System.out.println("max - "+maxStack.max());
 
     }
 

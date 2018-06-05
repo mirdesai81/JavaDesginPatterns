@@ -1,6 +1,6 @@
 package com.java.algorithm.search;
 
-import com.java.algorithm.Queue;
+import com.java.algorithm.queue.Queue;
 import com.java.stdlib.StdOut;
 
 import java.util.NoSuchElementException;

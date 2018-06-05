@@ -1,4 +1,4 @@
-package com.java.algorithm;
+package com.java.algorithm.queue;
 
 /**
  * Created by mihir.desai on 1/25/2018.

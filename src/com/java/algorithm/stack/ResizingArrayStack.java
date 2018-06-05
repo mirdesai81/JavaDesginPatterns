@@ -1,4 +1,4 @@
-package com.java.algorithm;
+package com.java.algorithm.stack;
 
 import java.util.EmptyStackException;
 import java.util.Iterator;
@@ -8,14 +8,19 @@ import java.util.Iterator;
  */
 public class ResizingArrayStack<T> implements Iterable<T> {
     private T[] item;
+
     int N = 0;
+
     public ResizingArrayStack(int capacity) {
         item = (T[]) new Object[capacity];
+
     }
 
     public ResizingArrayStack() {
         item = (T[])new Object[1];
+
     }
+
 
     private void resize(int max){
         T[] temp = (T[])new Object[max];

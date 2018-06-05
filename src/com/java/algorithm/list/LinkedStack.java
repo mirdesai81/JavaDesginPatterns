@@ -1,4 +1,4 @@
-package com.java.algorithm;
+package com.java.algorithm.list;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

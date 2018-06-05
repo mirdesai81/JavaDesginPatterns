@@ -1,10 +1,10 @@
-package com.java.algorithm;
+package com.java.algorithm.list;
 
 /**
  * Created by Mihir.Desai on 3/24/2017.
  */
 
-import com.java.algorithm.LinkedStack.Node;
+import com.java.algorithm.list.LinkedStack.Node;
 public class LinkedListTest {
 
     public static void main(String args[]) {
