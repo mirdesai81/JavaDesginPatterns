@@ -502,6 +502,51 @@ public class BinarySearchTree<Key extends Comparable<Key>,Value> {
     }
 
 
+    public void preOrder() {
+       Node x = root;
+       preOrder(x);
+       StdOut.println("");
+    }
+
+    private void preOrder(Node x) {
+        if(x != null) {
+            StdOut.print(x.key);
+            preOrder(x.left);
+            preOrder(x.right);
+        }
+    }
+
+    public void inOrder() {
+        Node x = root;
+        inOrder(x);
+        StdOut.println("");
+    }
+
+    public void inOrder(Node x) {
+        if(x != null) {
+            preOrder(x.left);
+            StdOut.print(x.key);
+            preOrder(x.right);
+        }
+
+    }
+
+
+    public void postOrder() {
+        Node x = root;
+        postOrder(x);
+        StdOut.println("");
+    }
+
+    public void postOrder(Node x) {
+        if(x != null) {
+            preOrder(x.left);
+            StdOut.print(x.key);
+            preOrder(x.right);
+        }
+
+    }
+
     public static void main(String[] args) {
         BinarySearchTree<Character,Integer> bst = new BinarySearchTree<>();
         String inputStr = "SEARCHEXAMPLE";
@@ -511,6 +556,11 @@ public class BinarySearchTree<Key extends Comparable<Key>,Value> {
             bst.put(c,i);
             i++;
         }
+
+        bst.preOrder();
+       bst.inOrder();
+       bst.postOrder();
+
 
     /*    System.out.println("Min key for BST - "+bst.min());
         System.out.println("Max key for BST - "+bst.max());
