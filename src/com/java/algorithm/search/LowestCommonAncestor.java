@@ -6,7 +6,7 @@ public class LowestCommonAncestor {
 
     private static class Status {
         public int num;
-        public BinaryTreeNode<Integer> ancestor;
+        public BinaryTreeNode<String> ancestor;
 
         public int getNum() {
             return num;
@@ -16,22 +16,22 @@ public class LowestCommonAncestor {
             this.num = num;
         }
 
-        public BinaryTreeNode<Integer> getAncestor() {
+        public BinaryTreeNode<String> getAncestor() {
             return ancestor;
         }
 
-        public void setAncestor(BinaryTreeNode<Integer> ancestor) {
+        public void setAncestor(BinaryTreeNode<String> ancestor) {
             this.ancestor = ancestor;
         }
 
-        public Status(int num, BinaryTreeNode<Integer> ancestor) {
+        public Status(int num, BinaryTreeNode<String> ancestor) {
             this.num = num;
             this.ancestor = ancestor;
         }
     }
 
-    public static BinaryTreeNode<Integer> LCA(BinaryTreeNode<Integer> tree,BinaryTreeNode<Integer> node1,
-                                               BinaryTreeNode<Integer> node2) {
+    public static BinaryTreeNode<String> LCA(BinaryTreeNode<String> tree,BinaryTreeNode<String> node1,
+                                               BinaryTreeNode<String> node2) {
         return LCAHelper(tree,node1,node2).ancestor;
     }
 
@@ -39,8 +39,8 @@ public class LowestCommonAncestor {
     // 0, 1, or 2 depending on how many of {node1 , node2} are present in
     // the tree. If both are present in the tree, when ancestor is
     // assigned to a non-null value, it is the LCA.
-    private static Status LCAHelper(BinaryTreeNode<Integer> tree,BinaryTreeNode<Integer> node1,
-                                    BinaryTreeNode<Integer> node2) {
+    private static Status LCAHelper(BinaryTreeNode<String> tree,BinaryTreeNode<String> node1,
+                                    BinaryTreeNode<String> node2) {
         if(tree == null) {
             return new Status(0,null);
         }
@@ -63,19 +63,24 @@ public class LowestCommonAncestor {
     }
 
     public static void main(String[] args) {
-        BinaryTreeNode<Integer> root = new BinaryTreeNode<>(314);
-        root.left = new BinaryTreeNode<>(46);
-        root.left.right = new BinaryTreeNode<>(12);
-        root.left.left = new BinaryTreeNode<>(14);
-        root.left.right.right = new BinaryTreeNode<>(13);
-        root.left.right.left = new BinaryTreeNode<>(16);
-
-        root.right = new BinaryTreeNode<>(36);
-        root.right.left = new BinaryTreeNode<>(22);
-        root.right.right = new BinaryTreeNode<>(24);
-        root.right.left.left = new BinaryTreeNode<>(23);
-        root.right.left.right = new BinaryTreeNode<>(26);
-        BinaryTreeNode<Integer> lca = LCA(root,root.right.left.left, root.right.left.right);
+        BinaryTreeNode<String> root = new BinaryTreeNode<String>("A");
+        //left
+        root.left = new BinaryTreeNode<>("B");
+        root.left.left = new BinaryTreeNode<>("C");
+        root.left.right = new BinaryTreeNode<>("H");
+        root.left.left.left = new BinaryTreeNode<>("D");
+        root.left.left.right = new BinaryTreeNode<>("G");
+        root.left.left.left.left = new BinaryTreeNode<>("E");
+        root.left.left.left.right = new BinaryTreeNode<>("F");
+        root.left.right.left = new BinaryTreeNode<>("I");
+        root.left.right.right = new BinaryTreeNode<>("J");
+        //right
+        root.right = new BinaryTreeNode<>("K");
+        root.right.left = new BinaryTreeNode<>("L");
+        root.right.right = new BinaryTreeNode<>("O");
+        root.right.left.left = new BinaryTreeNode<>("M");
+        root.right.left.right = new BinaryTreeNode<>("N");
+        BinaryTreeNode<String> lca = LCA(root,root.right.left.left, root.right.left.right);
         System.out.println(lca.data);
     }
 }
