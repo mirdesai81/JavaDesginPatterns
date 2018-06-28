@@ -1,7 +1,6 @@
-package com.java.algorithm.search;
+package com.java.algorithm.tree;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class TreeTraversal {
 

@@ -1,4 +1,4 @@
-package com.java.algorithm.search;
+package com.java.algorithm.tree;
 
 import com.java.algorithm.queue.Queue;
 import com.java.stdlib.StdOut;
@@ -260,7 +260,7 @@ public class BinarySearchTree<Key extends Comparable<Key>,Value> {
     }
 
     public void deleteMin() {
-        if(isEmpty()) throw new NoSuchElementException("Binary search tree is empty");
+        if(isEmpty()) throw new NoSuchElementException("Binary tree tree is empty");
         root = deleteMin(root);
     }
 
@@ -287,7 +287,7 @@ public class BinarySearchTree<Key extends Comparable<Key>,Value> {
     }
 
     public void deleteMax() {
-        if(isEmpty()) throw new NoSuchElementException("Binary search tree is empty");
+        if(isEmpty()) throw new NoSuchElementException("Binary tree tree is empty");
         root = deleteMax(root);
     }
 

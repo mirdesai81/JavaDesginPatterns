@@ -1,4 +1,4 @@
-package com.java.algorithm.search;
+package com.java.algorithm.tree;
 
 import com.java.algorithm.queue.Queue;
 import com.java.stdlib.StdOut;
@@ -44,7 +44,7 @@ public class BinarySearchST<K extends Comparable<K>,V> {
 
 
     /**
-     * Find the rank of the key using binary search
+     * Find the rank of the key using binary tree
      * @param key
      * @return index of Key in keys array
      */

@@ -1,10 +1,8 @@
-package com.java.algorithm.search;
+package com.java.algorithm.tree;
 
-import com.java.stdlib.StdIn;
 import com.java.stdlib.StdOut;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 

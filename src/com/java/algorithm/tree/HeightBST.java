@@ -1,6 +1,5 @@
-package com.java.algorithm.search;
+package com.java.algorithm.tree;
 
-import java.util.List;
 import java.util.Stack;
 
 public class HeightBST {

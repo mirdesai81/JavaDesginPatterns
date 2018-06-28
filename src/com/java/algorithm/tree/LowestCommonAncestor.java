@@ -1,4 +1,4 @@
-package com.java.algorithm.search;
+package com.java.algorithm.tree;
 
 
 

@@ -1,6 +1,4 @@
-package com.java.algorithm.search;
-
-import com.java.algorithm.queue.Queue;
+package com.java.algorithm.tree;
 
 import java.util.Stack;
 

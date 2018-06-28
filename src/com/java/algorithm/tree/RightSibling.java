@@ -1,7 +1,4 @@
-package com.java.algorithm.search;
-
-import java.util.List;
-import java.util.stream.Collectors;
+package com.java.algorithm.tree;
 
 public class RightSibling {
 
