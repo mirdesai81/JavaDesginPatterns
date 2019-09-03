@@ -12,50 +12,65 @@ public class Duplicates {
         if(input == null || input.isEmpty()) {
             return 0;
         }
-        System.out.println("Before Duplicates removed "+input);
+
         int writeIndex = 1;
-        for(int i = 1; i < input.size(); ++i) {
+
+        for(int i = 1; i < input.size();++i) {
             if(!input.get(writeIndex - 1).equals(input.get(i))) {
                 input.set(writeIndex++,input.get(i));
-                /*System.out.println("Duplicates overwrite "+input);*/
             }
         }
-        System.out.println("After Duplicates removed "+input.subList(0,writeIndex));
+
         return writeIndex;
     }
 
     public static int deleteElement(List<Integer> input,int key) {
-        if(input == null || input.isEmpty()) {
-            return 0;
-        }
-        System.out.println("Before removed "+input);
-        int writeIndex = 0;
-        for(int i = 0; i < input.size(); ++i) {
-            if(input.get(i) != key) {
-                input.set(writeIndex++,input.get(i));
-                /*System.out.println("Duplicates overwrite "+input);*/
-            }
-        }
-        System.out.println("After removed "+input.subList(0,writeIndex));
-        return writeIndex;
+       if(input == null || input.isEmpty()) {
+           return 0;
+       }
+
+       // for key deletion start the write index from 0
+       int writeIndex = 0;
+       for(int i = 0; i < input.size();++i) {
+           if(input.get(i) != key) {
+               input.set(writeIndex++,input.get(i));
+           }
+       }
+
+       if(writeIndex == 0) {
+           int totalElements = input.size();
+           input.clear();
+           return totalElements;
+       }
+
+       input.subList(0,writeIndex);
+
+       return writeIndex;
+
     }
 
     public static int limitDuplicatesInSortedArray(List<Integer> input,int m) {
-        int min = Math.min(2,m);
+
+        if(input == null || input.size() < m) {
+            throw new IllegalArgumentException("Either input is empty or number of duplicates is greater than input size");
+        }
+
+        int min = Math.min(2, m);
         int writeIndex = min;
         int duplicateCount = 1;
-        System.out.println("Before removed "+input);
-        for(int i = min; i < input.size(); ++i) {
+
+        for(int i = writeIndex; i < input.size();++i) {
             if(!input.get(writeIndex - 1).equals(input.get(i))) {
-                duplicateCount = 1;
+                duplicateCount = 1; // reset duplicate count to 1 since element is unique
                 input.set(writeIndex++,input.get(i));
             } else {
                 if(duplicateCount < min) {
+                    duplicateCount++;
                     input.set(writeIndex++,input.get(i));
-                    ++duplicateCount;
                 }
             }
         }
+
         System.out.println("After removed "+input.subList(0,writeIndex));
         return writeIndex;
     }

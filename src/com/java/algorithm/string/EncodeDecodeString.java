@@ -25,13 +25,12 @@ public class EncodeDecodeString {
     public static String encode(String s) {
         StringBuilder sb = new StringBuilder();
         int count = 1;
-        for(int i = 1; i <= s.length(); ++i) {
+        for(int i = 1; i <= s.length(); i++) {
             if(i == s.length() || s.charAt(i) != s.charAt(i - 1)) {
-                sb.append(count);
-                sb.append(s.charAt(i - 1));
+                sb.append(count).append(s.charAt(i - 1));
                 count = 1;
-            } else {
-                count++;
+            } else  {
+              count++;
             }
         }
 
@@ -43,7 +42,7 @@ public class EncodeDecodeString {
         System.out.println("original : "+s);
         String encoded = encode(s);
         System.out.println("Encoded :"+encoded);
-        System.out.println("Decoded to original :"+decode(encoded));
+        System.out.println("Decoded to original :"+decode("1a30b2a6c4d"));
 
     }
 }

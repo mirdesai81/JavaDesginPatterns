@@ -3,6 +3,7 @@ package com.java.algorithm.tree;
 import com.java.algorithm.queue.Queue;
 import com.java.stdlib.StdOut;
 
+import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.Stack;
 
@@ -31,7 +32,23 @@ public class BinarySearchTree<Key extends Comparable<Key>,Value> {
 
     public int size(Node x) {
         if (x == null) return 0;
-        else return x.N;
+        //else return x.N;
+        Stack<Node> stack = new Stack<>();
+        int size = 0;
+        stack.push(x);
+        while(!stack.isEmpty()) {
+            Node curr = stack.pop();
+            size++;
+            if(curr.right != null) {
+                stack.push(curr.right);
+            }
+
+            if(curr.left != null) {
+                stack.push(curr.left);
+            }
+        }
+
+        return size;
     }
 
     public boolean isEmpty() {
@@ -80,7 +97,7 @@ public class BinarySearchTree<Key extends Comparable<Key>,Value> {
 
     private Node put(Node x,Key key,Value value) {
         if(x == null) return new Node(key,value,1);
-        int cmp = key.compareTo(x.key);
+        /*int cmp = key.compareTo(x.key);
 
         if(cmp < 0) {
             x.left = put(x.left,key,value);
@@ -89,9 +106,30 @@ public class BinarySearchTree<Key extends Comparable<Key>,Value> {
         } else {
             // update the value
             x.value = value;
+        }*/
+        Node curr = x;
+        Node prev = null;
+        Node newNode = new Node(key,value,1);
+        while(curr != null) {
+            prev = curr;
+            int cmp = key.compareTo(curr.key);
+            if(cmp < 0) {
+                curr = curr.left;
+            } else if(cmp > 0) {
+                curr = curr.right;
+            } else  {
+                curr.value = value;
+                break;
+            }
         }
 
-        x.N = 1 + size(x.left) + size(x.right);
+        if(key.compareTo(prev.key) < 0) {
+            prev.left = newNode;
+        } else if(key.compareTo(prev.key) > 0) {
+            prev.right = newNode;
+        }
+
+
         return x;
     }
 
@@ -136,6 +174,13 @@ public class BinarySearchTree<Key extends Comparable<Key>,Value> {
         return x.key;
     }
 
+    /**
+     * Floor of given key is the largest value less or equal than given key
+     * returns node is which equal to given key or just less than given key
+     * @param x
+     * @param key
+     * @return
+     */
     private Node floor(Node x,Key key) {
         if(x == null) {
             return null;
@@ -161,6 +206,11 @@ public class BinarySearchTree<Key extends Comparable<Key>,Value> {
         return null;
     }
 
+    /**
+     * Ceil of given key is the smallest value greater than given key
+     * @param key
+     * @return
+     */
     public Key ceil(Key key) {
         if(key == null) throw new IllegalArgumentException("called ceil() with null key");
         if(isEmpty()) throw new NoSuchElementException("BST is empty");
@@ -216,6 +266,7 @@ public class BinarySearchTree<Key extends Comparable<Key>,Value> {
         int rank = 0;
         while(x != null) {
             int cmp = key.compareTo(x.key);
+            System.out.println("Key : "+x.key);
             if(cmp == 0) {
                 return size(x.left) + rank;
             } else if (cmp < 0) {
@@ -242,6 +293,23 @@ public class BinarySearchTree<Key extends Comparable<Key>,Value> {
 
     private Node select(Node x,int k) {
         if(x == null) return null;
+
+
+       /* while(x != null) {
+            int leftSize = size(x.left);
+
+            if(k > leftSize + 1) { // k must be in right subtree
+                k = k - (leftSize + 1);
+                x = x.right;
+            } else if(k == leftSize + 1) {
+                return x;
+            } else {
+                x = x.left;
+            }
+
+        }*/
+
+
 
         while(x != null) {
             int t = size(x.left);
@@ -516,6 +584,29 @@ public class BinarySearchTree<Key extends Comparable<Key>,Value> {
         }
     }
 
+    /**
+     * ROOT L R
+     */
+    public void preOrderItr() {
+        preOrderItr(root);
+    }
+
+    public void preOrderItr(Node root) {
+        if(root == null) return;
+        Stack<Node> stack = new Stack<>();
+        stack.push(root);
+        while(!stack.isEmpty()) {
+            Node x = stack.pop();
+           StdOut.print(x.key);
+           if(x.right != null) {
+               stack.push(x.right);
+           }
+           if(x.left != null) {
+               stack.push(x.left);
+           }
+        }
+    }
+
     public void inOrder() {
         Node x = root;
         inOrder(x);
@@ -524,12 +615,55 @@ public class BinarySearchTree<Key extends Comparable<Key>,Value> {
 
     public void inOrder(Node x) {
         if(x != null) {
-            preOrder(x.left);
+            inOrder(x.left);
             StdOut.print(x.key);
-            preOrder(x.right);
+            inOrder(x.right);
         }
 
     }
+
+    /**
+     * L Root R
+     */
+    public void inOrderItr() {
+        inOrderItr(root);
+    }
+
+    public void inOrderItr(Node root) {
+        Stack<Node> stack = new Stack<>();
+        Node x = root;
+        while(!stack.isEmpty() || x != null) {
+            if(x != null) {
+                stack.push(x);
+                x = x.left;
+            } else {
+                x = stack.pop();
+                StdOut.print(x.key);
+                x = x.right;
+            }
+        }
+    }
+
+
+    public void higestToSmallestItr() {
+        higestToSmallestItr(root);
+    }
+
+    public void higestToSmallestItr(Node root) {
+        Stack<Node> stack = new Stack<>();
+        Node x = root;
+        while(x != null || !stack.isEmpty()) {
+            if(x != null) {
+                stack.push(x);
+                x = x.right;
+            } else {
+                x = stack.pop();
+                StdOut.print(x.key);
+                x = x.left;
+            }
+        }
+    }
+
 
 
     public void postOrder() {
@@ -540,11 +674,40 @@ public class BinarySearchTree<Key extends Comparable<Key>,Value> {
 
     public void postOrder(Node x) {
         if(x != null) {
-            preOrder(x.left);
+            postOrder(x.left);
+            postOrder(x.right);
             StdOut.print(x.key);
-            preOrder(x.right);
+
         }
 
+    }
+
+
+    public void postOrderItr() {
+        postOrderItr(root);
+    }
+
+    public void postOrderItr(Node root) {
+        Stack<Node> stack = new Stack<>();
+        Node curr = root;
+        while(curr != null || !stack.isEmpty()) {
+            if(curr != null) {
+                stack.add(curr);
+                curr = curr.left;
+            } else {
+                Node temp = stack.peek().right;
+                if(temp == null) {
+                    temp = stack.pop();
+                    StdOut.print(temp.key);
+                    while(!stack.isEmpty() && temp == stack.peek().right) {
+                        temp = stack.pop();
+                        StdOut.print(temp.key);
+                    }
+                } else {
+                    curr = temp;
+                }
+            }
+        }
     }
 
     public static void main(String[] args) {
@@ -558,10 +721,31 @@ public class BinarySearchTree<Key extends Comparable<Key>,Value> {
         }
 
         bst.preOrder();
+        StdOut.println();
        bst.inOrder();
+        StdOut.println();
        bst.postOrder();
+        StdOut.println();
 
 
+       bst.inOrderItr();
+        StdOut.println();
+
+
+       bst.higestToSmallestItr();
+        StdOut.println();
+        System.out.println("Select(5) - "+bst.select(5));
+        System.out.println("Select(1) - "+bst.select(1));
+        System.out.println("Select(9) - "+bst.select(9));
+
+        for (Character s : bst.levelOrder())
+            StdOut.println(s + " " + bst.get(s));
+
+        System.out.println("Rank of M - "+bst.rank('M'));
+        System.out.println("Rank of A - "+bst.rank('A'));
+        System.out.println("Rank of X - "+bst.rank('X'));
+        bst.height();
+        bst.delete('E');
     /*    System.out.println("Min key for BST - "+bst.min());
         System.out.println("Max key for BST - "+bst.max());
 

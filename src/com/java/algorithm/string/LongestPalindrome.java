@@ -6,55 +6,67 @@ package com.java.algorithm.string;
 public class LongestPalindrome {
 
     public static int longestPalindrome(String s) {
-        int maxPalindrome = 0;
-        String palindrome = "";
-        // odd length
-        for(int i = 0;i < s.length() - 1; ++i) {
-            int left = i - 1;
-            int right = i + 1;
-            int currPalindrome = 1;
-            String oddPalindrome = "" + s.charAt(i);
-            String evenPalindrome = "" + s.charAt(i) + s.charAt(i+1);
-            while(left >= 0 && right <= s.length() - 1) {
-                if(s.charAt(left) != s.charAt(right)) {
-                    break;
-                }
+       int maxPalindrome = 0;
+       String palindrome;
+        String currPalindromeString;
 
-                currPalindrome += 2;
-                oddPalindrome = ("" + s.charAt(left)) + oddPalindrome + ("" + s.charAt(right));
-                --left;
-                ++right;
-            }
+       for(int i = 0; i < s.length() - 1;i++) {
+           int left = i - 1;
+           int right = i + 1;
+           int currPalindrome = 1;
+           StringBuilder oddPalindrome = new StringBuilder();
+           oddPalindrome.append(s.charAt(i));
+           StringBuilder evenPalindrome = new StringBuilder();
+           evenPalindrome.append(s.charAt(i)).append(s.charAt(i + 1));
 
-            if(currPalindrome > maxPalindrome) {
-                maxPalindrome = currPalindrome;
-                palindrome = oddPalindrome;
-            }
+           // odd
+           while(left >= 0 && right <= s.length() - 1) {
+               if(s.charAt(left) != s.charAt(right)) {
+                   break;
+               }
 
-            if(i < s.length() - 1 && s.charAt(i) == s.charAt(i+1)) {
-                left = i - 1;
-                right = i + 2;
-                currPalindrome = 2;
+               currPalindrome += 2;
+               currPalindromeString = oddPalindrome.toString();
+               oddPalindrome = new StringBuilder();
+               oddPalindrome.append(s.charAt(left)).append(currPalindromeString).append(s.charAt(right));
+               --left;
+               ++right;
+           }
 
-                while(left >= 0 && right <= s.length() - 1) {
-                    if(s.charAt(left) != s.charAt(right)) {
-                        break;
-                    }
+           if(currPalindrome > maxPalindrome) {
+               maxPalindrome = currPalindrome;
+               palindrome = oddPalindrome.toString();
+               System.out.println("Current Longest Palindrome for odd - "+palindrome);
+           }
 
-                    currPalindrome += 2;
-                    evenPalindrome = ("" + s.charAt(left)) + evenPalindrome + ("" + s.charAt(right));
-                    --left;
-                    ++right;
-                }
+           // even
+           if(i < s.length() - 1 && s.charAt(i) == s.charAt(i + 1)) {
+               left = i - 1;
+               right = i + 2;
+               currPalindrome = 2;
 
-                if(currPalindrome > maxPalindrome) {
-                    maxPalindrome = currPalindrome;
-                    palindrome = evenPalindrome;
-                }
-            }
+               while(left >= 0 && right <= s.length() - 1) {
+                   if(s.charAt(left) != s.charAt(right)) {
+                       break;
+                   }
 
-            System.out.println("Palindrome - "+ palindrome);
-        }
+                   currPalindrome = currPalindrome + 2;
+                   currPalindromeString = evenPalindrome.toString();
+                   evenPalindrome = new StringBuilder();
+                   evenPalindrome.append(s.charAt(left)).append(currPalindromeString).append(s.charAt(right));
+                   --left;
+                   ++right;
+               }
+
+               if(currPalindrome > maxPalindrome) {
+                   maxPalindrome = currPalindrome;
+                   palindrome = evenPalindrome.toString();
+                   System.out.println("Current Longest Palindrome for even - "+palindrome);
+               }
+           }
+
+       }
+
 
         return maxPalindrome;
     }

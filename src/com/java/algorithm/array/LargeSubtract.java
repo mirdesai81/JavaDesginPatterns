@@ -30,12 +30,6 @@ public class LargeSubtract {
         return false;
     }
 
-    public static void swap(char[] num1,char[] num2) {
-        char[] temp;
-        temp = num1;
-        num1 = num2;
-        num2 = temp;
-    }
 
     public static char[] largeSubtract(char[] num1, char[] num2,boolean[] isNegative) {
         isNegative[0] = false;

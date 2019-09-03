@@ -76,15 +76,15 @@ public class LinkedStack<T extends Comparable<T>> implements Iterable<T> {
             }
             curr.next = n;
         }
-    }
+    }*/
 
     public void insertLoop(int index) {
-        Node curr = first;
+        Node curr = head;
         while (curr.next != null) {
             curr = curr.next;
         }
 
-        Node indexNode = first;
+        Node indexNode = head;
         while(index != 0) {
             indexNode = indexNode.next;
             index--;
@@ -92,7 +92,7 @@ public class LinkedStack<T extends Comparable<T>> implements Iterable<T> {
 
         curr.next = indexNode;
     }
-*/
+
 
     public T addFirst(T item){
         Node newest = new Node(item,head);

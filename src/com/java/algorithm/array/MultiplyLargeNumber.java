@@ -49,8 +49,11 @@ public class MultiplyLargeNumber {
     }
 
     public static void main(String[] args) {
-        List<Integer> num1 = new ArrayList<>(Arrays.asList(1,9,3,7,0,7,7,2,1));
-        List<Integer> num2 = new ArrayList<>(Arrays.asList(-7,6,1,8,3,8,2,5,7,2,8,7));
+      //  List<Integer> num1 = new ArrayList<>(Arrays.asList(1,9,3,7,0,7,7,2,1));
+      //  List<Integer> num2 = new ArrayList<>(Arrays.asList(-7,6,1,8,3,8,2,5,7,2,8,7));
+
+        List<Integer> num1 = new ArrayList<>(Arrays.asList(1,1,2));
+        List<Integer> num2 = new ArrayList<>(Arrays.asList(1,1));
         System.out.println(num1);
         System.out.println(num2);
         System.out.println("calling multiply()...");

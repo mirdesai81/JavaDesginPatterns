@@ -6,36 +6,35 @@ package com.java.algorithm.string;
 public class ReverseWords {
 
     public static void reverseWords(char[] input) {
-        // reverse entire string of input char
+       // first reverse entire string
         reverse(input,0,input.length);
-
-        // reverse individual words by find start and end based on space ' '
-
-        int start = 0, end;
+        int start = 0 , end;
         while((end = find(input,' ',start)) != -1) {
             reverse(input,start,end);
             start = end + 1;
         }
 
-        // last word reverse
         reverse(input,start,input.length);
     }
 
     public static void reverse(char[] input,int start, int stopIndex) {
-        if(start >= stopIndex) {
-            return;
-        }
+       if(start >= stopIndex) {
+           return;
+       }
 
-        int last = stopIndex - 1;
-        for(int i = start; i <= start + (last - start)/2;i++) {
-            char temp = input[i];
-            input[i] = input[last - i + start];
-            input[last - i + start] = temp;
-        }
+       int last = stopIndex - 1;
+       while(start < last) {
+           char temp = input[start];
+           input[start] = input[last];
+           input[last] = temp;
+           start++;
+           last--;
+       }
     }
 
     public static int find(char[] input,char c,int start) {
-        for(int i = start; i < input.length; i++) {
+
+        for(int i = start; i < input.length;i++) {
             if(input[i] == c) {
                 return i;
             }

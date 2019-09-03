@@ -1,13 +1,17 @@
 package com.java.algorithm.queue;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 /**
  * Created by mihir.desai on 1/25/2018.
  */
 public class ArrayQueue<T> {
     private int sz = 0; // current number of elements
-    private int f = 0; // index of front element
+    private int head = 0; // index of front element
+    private int tail = 0;
     private T[] data;
-
+    private static final int SCALE_FACTOR = 2;
     public ArrayQueue() {
         this(10);
     }
@@ -31,11 +35,15 @@ public class ArrayQueue<T> {
      */
     public void enqueue(T e) throws IllegalStateException {
         if(sz == data.length) {
-            throw new IllegalStateException("Queue is full");
+            Collections.rotate(Arrays.asList(data), -head);
+            // Reset Head and Tail
+            head = 0;
+            tail = sz;
+            data = Arrays.copyOf(data,sz * SCALE_FACTOR);
         }
 
-        int avail = (f + sz) % data.length;
-        data[avail] = e;
+        data[tail] = e;
+        tail = (tail + 1) % data.length;
         sz++;
     }
 
@@ -44,7 +52,15 @@ public class ArrayQueue<T> {
             return null;
         }
 
-        return data[f];
+        return data[head];
+    }
+
+    public T last() {
+        if(isEmpty()) {
+            return null;
+        }
+
+        return data[tail];
     }
 
     /**
@@ -53,10 +69,18 @@ public class ArrayQueue<T> {
      */
     public T dequeue() {
         if(isEmpty()) return null;
-        T val = data[f];
-        data[f] = null;
-        f = (f + 1) % data.length;
+        T val = data[head];
+        data[head] = null;
+        head = (head + 1) % data.length;
         sz--;
         return val;
+    }
+
+    public static void main(String[] args) {
+        ArrayQueue<Integer> queue = new ArrayQueue<>(10);
+
+        for(int i = 0; i < 20;i++) {
+            queue.enqueue(i + 1);
+        }
     }
 }

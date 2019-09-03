@@ -109,7 +109,7 @@ public class ResizingArrayStack<T> implements Iterable<T> {
         }
 
         ResizingArrayStack<Integer> stack1 = new ResizingArrayStack<>();
-        int N = 50;
+        int N = 7;
         while(N > 0) {
             stack1.push(N%2);
             N = N/2;

@@ -1,17 +1,19 @@
 package com.java.algorithm.stack;
 
 
+import java.util.Deque;
+import java.util.LinkedList;
 
 public class MaxStack {
 
-    ResizingArrayStack<Integer> element = new ResizingArrayStack<>(10);
-    ResizingArrayStack<MaxWithCount> cachedMaxWithCount = new ResizingArrayStack<>(10);
+    private Deque<Integer> element = new LinkedList<Integer>();
+    private Deque<MaxWithCount> cachedMaxWithCount = new LinkedList<>();
 
     private class MaxWithCount {
         Integer max;
         Integer count;
 
-        public MaxWithCount(Integer max, Integer count) {
+        MaxWithCount(Integer max, Integer count) {
             this.max = max;
             this.count = count;
         }
@@ -42,7 +44,7 @@ public class MaxStack {
            throw new IllegalStateException("max(): empty stack");
        }
 
-       return cachedMaxWithCount.peek().max;
+       return cachedMaxWithCount.peekFirst().max;
     }
 
     public Integer pop() {
@@ -50,12 +52,12 @@ public class MaxStack {
             throw new IllegalStateException("pop(): stack empty");
         }
 
-        Integer data = element.pop();
-        Integer currMax = cachedMaxWithCount.peek().max;
+        Integer data = element.removeFirst();
+        Integer currMax = cachedMaxWithCount.peekFirst().max;
         if(data.compareTo(currMax) == 0) { // if it match decrement the count and if count is 0 then remove from max
-            cachedMaxWithCount.peek().count = cachedMaxWithCount.peek().count - 1;
-            if(cachedMaxWithCount.peek().count.equals(0)) {
-                cachedMaxWithCount.pop();
+            cachedMaxWithCount.peekFirst().count = cachedMaxWithCount.peekFirst().count - 1;
+            if(cachedMaxWithCount.peekFirst().count.equals(0)) {
+                cachedMaxWithCount.removeFirst();
             }
         }
 
@@ -63,17 +65,17 @@ public class MaxStack {
     }
 
     public void push(Integer x) {
-        element.push(x);
+      element.push(x);
 
-        if(!cachedMaxWithCount.isEmpty()) {
-            Integer currMax = cachedMaxWithCount.peek().max;
-            if(x.compareTo(currMax) == 0) { // if equal update the count
-                cachedMaxWithCount.peek().count = cachedMaxWithCount.peek().count + 1;
-            } else if(x.compareTo(currMax) > 0) { // if greater than currMax then push it
+      if(!cachedMaxWithCount.isEmpty()) {
+            int compare = Integer.compare(x,cachedMaxWithCount.peekFirst().max);
+            if(compare == 0) {
+                cachedMaxWithCount.peekFirst().count = cachedMaxWithCount.peekFirst().count + 1;
+            } else if(compare > 0) {
                 cachedMaxWithCount.push(new MaxWithCount(x,1));
             }
-        } else {
-            cachedMaxWithCount.push(new MaxWithCount(x,1));
-        }
+      } else {
+          cachedMaxWithCount.push(new MaxWithCount(x,1));
+      }
     }
 }

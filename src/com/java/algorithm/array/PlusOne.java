@@ -13,7 +13,7 @@ import java.util.List;
  * a decimal number D and updates the array to represent the number D + 1.
  * For example, if the input is (1,2,9) then you should update the array to (1,3,0).
  */
-public class DigitEncoding {
+public class PlusOne {
 
     public static List<Integer> plusOne(List<Integer> a) {
         int n = a.size() - 1;

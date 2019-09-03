@@ -12,6 +12,23 @@ public class ArrayStackTest {
     public static void main(String[] args) {
 
 
+        MaxStackWithCachedMax maxStackWithCachedMax = new MaxStackWithCachedMax();
+        maxStackWithCachedMax.push(2);
+        maxStackWithCachedMax.push(2);
+        maxStackWithCachedMax.push(1);
+        maxStackWithCachedMax.push(4);
+        maxStackWithCachedMax.push(5);
+        maxStackWithCachedMax.push(5);
+        maxStackWithCachedMax.push(3);
+        maxStackWithCachedMax.pop();
+        System.out.println("max - "+maxStackWithCachedMax.max());
+        maxStackWithCachedMax.pop();
+        maxStackWithCachedMax.pop();
+        System.out.println("max - "+maxStackWithCachedMax.max());
+        maxStackWithCachedMax.pop();
+        maxStackWithCachedMax.pop();
+        System.out.println("max - "+maxStackWithCachedMax.max());
+
 
         Integer[] a = { 10, 9, 8 };
         System.out.println("Before reverse - "+ Arrays.toString(a));

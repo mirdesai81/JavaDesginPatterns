@@ -6,7 +6,7 @@ package com.java.algorithm.array;
  * binary numbers Bs and B, respectively, and returns a new string of bits representing
  * the number Bs + Bt.
  */
-public class BitEncoding {
+public class AddBinaryNumbers {
 
     public static String addBinary(String a, String b){
         StringBuilder sb = new StringBuilder();

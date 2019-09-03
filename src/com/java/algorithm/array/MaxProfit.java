@@ -7,16 +7,25 @@ import java.util.*;
  */
 public class MaxProfit {
     public static double maxProfit(List<Double> prices) {
-        double minPrice = Double.MAX_VALUE;
-        double maxProfit = 0;
+      double maxProfit = 0.0;
+      double minSoFar = Double.MAX_VALUE;
+      double maxValue = Double.MIN_VALUE;
+      double minValue = Double.MAX_VALUE;
+      // find minSoFar for all entries
+        // find maxProfit by finding max of maxProfit and  difference of ith price and minPriceSoFar
 
-        for(int i = 0 ; i < prices.size(); ++i){
-            Double price = prices.get(i);
-            maxProfit = Math.max(maxProfit, price - minPrice);
-            minPrice = Math.min(minPrice,price);
-            System.out.println("Price - "+price+" ,Min Price - "+minPrice+" ,Max Profit - "+maxProfit);
+        for(int i = 0; i < prices.size();++i) {
+            minSoFar = Math.min(minSoFar,prices.get(i));
+            if(prices.get(i) - minSoFar > maxProfit) {
+                maxValue = prices.get(i);
+                minValue = minSoFar;
+            }
+
+            maxProfit = Math.max(maxProfit,prices.get(i) - minSoFar);
+
         }
 
+        System.out.println("Min Price - "+minValue+" ,Max Price - "+maxValue+" ,Max Profit - "+maxProfit);
         return maxProfit;
     }
 
@@ -97,10 +106,12 @@ public class MaxProfit {
     }
 
     public static void main(String[] args) {
-       /* List<Double> prices = new ArrayList<>(Arrays.asList(310.0,315.0,275.0,295.0,260.0,270.0,290.0,230.0,255.0,250.0));
-        maxProfit(prices);
-        System.out.println(prices);
-        buyAndSellStockTwice(prices);*/
+        //List<Double> prices = new ArrayList<>(Arrays.asList(310.0,315.0,275.0,295.0,260.0,270.0,290.0,230.0,255.0,250.0));
+        //maxProfit(prices);
+
+
+        //System.out.println(prices);
+       // buyAndSellStockTwice(prices);
 
         int[] pricesK = new int[] {310,315,275,295,260,270,290,230,255,250};
         System.out.println(maxProfit(pricesK, 3));

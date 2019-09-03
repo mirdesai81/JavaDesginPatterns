@@ -1,5 +1,8 @@
 package com.java.algorithm.tree;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class WeightedSum {
 
     public static boolean weightedSumEqauls(BinaryTreeNode<Integer> root,int sum) {
@@ -18,6 +21,28 @@ public class WeightedSum {
         }
 
         return weightedSumEqualsHelper(root.left,partialSum,sum) || weightedSumEqualsHelper(root.right,partialSum,sum);
+    }
+
+    private static boolean weightedSumALL(BinaryTreeNode<Integer> root, int sum, List<BinaryTreeNode<Integer>> path) {
+        if(root == null) {
+            return false;
+        }
+
+        if(root.left == null && root.right == null) {
+            if(root.data == sum) {
+                path.add(root);
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        if(weightedSumALL(root.left, sum - root.data,path) || weightedSumALL(root.right,sum - root.data,path)) {
+            path.add(root);
+            return true;
+        }
+
+        return false;
     }
 
     public static void main(String[] arga) {
@@ -45,5 +70,15 @@ public class WeightedSum {
         root.right.right.right = new BinaryTreeNode<>(28);
 
         System.out.println(weightedSumEqauls(root,591));
+
+        List<BinaryTreeNode<Integer>> result = new LinkedList<>();
+        boolean r = weightedSumALL(root,619,result);
+
+        if(r){
+            result.forEach(node -> System.out.print(node.data + " "));
+        }else{
+            System.out.println("No path for sum " + 619);
+        }
+
     }
 }

@@ -17,7 +17,7 @@ public class LongestSequenceEqualNumbers {
         int temp = 0;
 
         for(int i = 1; i < input.size(); ++i){
-            if(input.get(i) == input.get(i - 1)) {
+            if(input.get(i).equals(input.get(i - 1))) {
                 count++;
             } else {
                 if(count > max) {

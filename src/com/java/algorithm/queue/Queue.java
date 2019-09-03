@@ -12,22 +12,43 @@ public class Queue<T> implements Iterable<T>{
     private class Node {
         Node next;
         T item;
+
+        public Node( T item,Node next) {
+            this.next = next;
+            this.item = item;
+        }
     }
 
     public boolean isEmpty() {return N == 0;}
     public int size() {return N;}
 
     public void enqueue(T item) {
-        Node oldLast = last;
-        last = new Node();
-        last.item = item;
-        last.next = null;
+        Node curr = new Node(item,null);
+
         if(isEmpty()) {
-            first = last;
+            first = last = curr;
         } else {
-            oldLast.next = last;
+            last.next = curr;
+            last = curr;
         }
+
         N++;
+    }
+
+    public T last() {
+        if(isEmpty()) {
+            throw new IllegalStateException("Queue is empty");
+        }
+
+        return last.item;
+    }
+
+    public T first() {
+        if(isEmpty()) {
+            throw new IllegalStateException("Queue is empty");
+        }
+
+        return first.item;
     }
 
     public T dequeue() {
@@ -70,12 +91,14 @@ public class Queue<T> implements Iterable<T>{
         for(String s : data) {
             if(!s.equals("-"))
                 queue.enqueue(s);
-            else if(!queue.isEmpty()) {
+           /* else if(!queue.isEmpty()) {
                 System.out.println(queue.dequeue());
-            }
+            }*/
         }
 
         System.out.println("Size left on queue - "+queue.size());
+        System.out.println("First element on queue - "+queue.first());
+        System.out.println("Last element on queue - "+queue.last());
 
         Iterator<String> it = queue.iterator();
         while(it.hasNext()) {

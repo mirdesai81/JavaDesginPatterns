@@ -32,13 +32,26 @@ public class LinkedListTest {
         /*System.out.println(stack.toString());*/
 
         LinkedStack<Integer> stack1 = new LinkedStack<>();
-     /*   for(int i = 1 ; i < 10;i++) {
+        for(int i = 1 ; i < 10;i++) {
             stack1.addFirst(i);
         }
 
         System.out.println("Before swap - "+test.getItems(stack1.getFirst()));
         Node newHead = test.swapNodes(stack1.getFirst());
-        System.out.println("After swap - "+test.getItems(newHead));*/
+        System.out.println("After swap - "+test.getItems(newHead));
+
+        stack1 = new LinkedStack<>();
+        stack1.addFirst(1);
+        stack1.addFirst(2);
+        stack1.addFirst(1);
+        stack1.addFirst(1);
+        stack1.addFirst(2);
+        stack1.addFirst(2);
+        stack1.addFirst(1);
+
+
+        System.out.println("Before finding palindrome - "+test.getItems(stack1.getFirst()));
+        System.out.println("Max palindrome - " + test.maxPalindrome(stack1.getFirst()));
 
 
         stack1 = new LinkedStack<>();
@@ -49,44 +62,41 @@ public class LinkedListTest {
         stack1.addFirst(1);
         stack1.addFirst(11);
 
-      /*  System.out.println("Before finding palindrome - "+test.getItems(stack1.getFirst()));
-        System.out.println("Max palindrome - " + test.maxPalindrome(stack1.getFirst()));
-*/
-       /* System.out.println("Before Swap - "+test.getItems(stack1.getFirst()));
+        System.out.println("Before Swap - "+test.getItems(stack1.getFirst()));
         test.swapKthNode(stack1.getFirst(),2);
 
         System.out.println("Before Swap - "+test.getItems(stack1.getFirst()));
-        test.swapKthNode(stack1.getFirst(),1);*/
+        test.swapKthNode(stack1.getFirst(),1);
 
-     /*   stack1 = new LinkedStack<>();
-        stack1.push(1);
-        stack1.push(3);
-        stack1.push(3);
-        stack1.push(4);
-        stack1.push(5);
-        stack1.push(6);
-        stack1.push(7);
-        stack1.push(8);
-        stack1.push(9);
-        stack1.push(10);
+        stack1 = new LinkedStack<>();
+        stack1.addLast(1);
+        stack1.addLast(2);
+        stack1.addLast(3);
+        stack1.addLast(4);
+        stack1.addLast(5);
+        stack1.addLast(6);
+        stack1.addLast(7);
+        stack1.addLast(8);
+        stack1.addLast(9);
+        stack1.addLast(10);
 
         System.out.println("Original List - "+test.getItems(stack1.getFirst()));
         Node head = test.reverseAltKNodes(stack1.getFirst(),2);
         System.out.println("After calling reverse alternate 2 nodes - " + test.getItems(head));
 
-        Node sortedList = test.mergeSort(head);
-        System.out.println("After calling merge sort - " + test.getItems(sortedList));
+       /* Node sortedList = test.mergeSort(head);
+        System.out.println("After calling merge sort - " + test.getItems(sortedList));*/
 
         stack1 = new LinkedStack<>();
-        stack1.pushAtEnd(1);
-        stack1.pushAtEnd(2);
-        stack1.pushAtEnd(3);
-        stack1.pushAtEnd(4);
-        stack1.pushAtEnd(5);
-        stack1.pushAtEnd(6);
+        stack1.addLast(1);
+        stack1.addLast(2);
+        stack1.addLast(3);
+        stack1.addLast(4);
+        stack1.addLast(5);
+        stack1.addLast(6);
         stack1.insertLoop(2);
-        test.displayLoop(stack1.getFirst());
-        test.findLoop(stack1.getFirst());*/
+        test.displayLoop(stack1.getFirst(),3);
+        test.findLoop(stack1.getFirst());
 
         stack1 = new LinkedStack<>();
         stack1.addLast(10);
@@ -270,7 +280,7 @@ public class LinkedListTest {
      * @return
      */
     public Node swapNodes(Node first) {
-        Node ptrOne_prev = null;
+      /*  Node ptrOne_prev = null;
         Node newFirst = null;
 
         while(first != null && first.next != null) {
@@ -291,7 +301,29 @@ public class LinkedListTest {
             first = ptrTwoNext;
         }
 
-        return newFirst;
+        return newFirst;*/
+
+      Node prev = first;
+      Node curr  = first.next;
+      first = curr;
+
+      while(true) {
+          Node next = curr.next;
+          curr.next = prev;
+
+          if(next== null || next.next == null) {
+              prev.next = next;
+              break;
+          }
+
+          prev.next = next.next;
+
+          // change pev and curr
+          prev = next;
+          curr = prev.next;
+      }
+
+      return first;
     }
 
     /**
@@ -319,8 +351,8 @@ public class LinkedListTest {
 
     private int countCommon(Node a, Node b) {
         int count = 0;
-        for(;a!=null && b!= null;a=a.next,b=b.next) {
-            /*System.out.println("A : "+a.item+", B: "+b.item);*/
+       /* for(;a!=null && b!= null;a=a.next,b=b.next) {
+            *//*System.out.println("A : "+a.item+", B: "+b.item);*//*
             if(a.item instanceof String) {
                 if(((String) a.item).equalsIgnoreCase((String)b.item)) {
                     ++count;
@@ -333,6 +365,24 @@ public class LinkedListTest {
                 }
                 else return count;
             }
+        }*/
+
+        while(a != null && b != null) {
+            if(a.item instanceof String) {
+                if(((String) a.item).equalsIgnoreCase((String)b.item)) {
+                    ++count;
+                } else {
+                    return count;
+                }
+            } else {
+                if(a.item == b.item) {
+                    ++count;
+                }
+                else return count;
+            }
+
+            a = a.next;
+            b = b.next;
         }
 
         return count;
@@ -350,14 +400,20 @@ public class LinkedListTest {
         Node next = null;
 
         while(curr != null) {
+            // next of curr
             next = curr.next;
+            //change curr.next to point to prev
             curr.next = prev;
+            // change prev to point to curr
             prev = curr;
+
+            // move curr to next
             curr = next;
         }
 
+        // change first in the end to prev as it is first node
         first = prev;
-        /*System.out.println(getItems(first));*/
+
         return prev;
     }
 
@@ -375,16 +431,23 @@ public class LinkedListTest {
             head = head.getNext();
         }
 
-        Node next = head.getNext();
 
-        while(start++ < finish) {
-            Node temp = next.getNext();
-            next.setNext(temp.getNext());
-            temp.setNext(head.getNext());
-            head.setNext(temp);
+        Node prevCurr = head.getNext();
+        Node curr = head.getNext();
+        Node prev = null;
+        Node next = null;
+
+        while(start++ <= finish) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
         }
 
-        return result;
+        head.next = prev;
+        prevCurr.next = curr;
+
+        return head;
     }
 
     /**
@@ -416,8 +479,6 @@ public class LinkedListTest {
         Node prev = null;
         Node next = null;
         int count = 0;
-
-        // reverse 1st K nodes of list;
         while(count < k && curr != null) {
             next = curr.next;
             curr.next = prev;
@@ -426,24 +487,22 @@ public class LinkedListTest {
             count++;
         }
 
-        // now move the head which is cur to k+1 node
         if(first != null) {
             first.next = curr;
         }
 
         count = 0;
-        while(count < k-1 && curr != null) {
+        while(count > k - 1 && curr != null) {
             curr = curr.next;
             count++;
         }
 
-        // recursive call from curr.next node
         if(curr != null) {
             curr.next = reverseAltKNodes(curr.next,k);
         }
 
         first = prev;
-        System.out.println(getItems(first));
+      /*  System.out.println(getItems(first));*/
         return first;
     }
 
@@ -577,19 +636,23 @@ public class LinkedListTest {
             return first;
         }
 
-        //find new head for second sublist
-        while(mid-1 > 0) {
+        // get the head node of second sublist
+        while(mid - 1 > 0) {
             oldFirst = oldFirst.next;
             mid--;
         }
 
+        // oldfirst now points to last element of first subList so oldFirst.next is the new head of second subList
         Node newFirst = oldFirst.next;
-        // break 1st list
+        // split into two list by setting oldFirst.next to null of first subList
         oldFirst.next = null;
-        //move back pointer to first node
+        // Move oldFirst to first head Node
         oldFirst = first;
+
+        // Now you have two subList
         Node t1 = mergeSort(oldFirst);
         Node t2 = mergeSort(newFirst);
+
         return mergeList(t1,t2);
     }
 
@@ -682,14 +745,17 @@ public class LinkedListTest {
         a.next = null;
     }
 
-    public void displayLoop(Node first){
-        System.out.println("");
-        Node currNode = first;
-        int cnt = 15;
-        while(cnt!=0){
-            System.out.print("->" + currNode.item);
-            currNode=currNode.next;
-            cnt--;
+    public void displayLoop(Node first,Integer item){
+
+
+        Node a = first;
+        int count = 2;
+        while(count >= 0) {
+            System.out.print(a.item + "--->");
+            if(((Integer)a.getItem()).equals(item)) {
+                count--;
+            }
+            a = a.next;
         }
     }
 

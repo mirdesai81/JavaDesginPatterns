@@ -69,10 +69,10 @@ public class MinMaxAdvance {
 
     public static void main(String[] args) {
         List<Integer> input = new ArrayList<>(Arrays.asList(3,3,1,0,2,0,1));
-        System.out.println(maxCanReachEnd(input));
+        //System.out.println(maxCanReachEnd(input));
 
-        input = new ArrayList<>(Arrays.asList(2,4,1,1,0,2,3));
-        System.out.println(maxCanReachEnd(input));
+        //input = new ArrayList<>(Arrays.asList(2,4,1,1,0,2,3));
+        //System.out.println(maxCanReachEnd(input));
 
         System.out.println(minJumps(input));
     }
