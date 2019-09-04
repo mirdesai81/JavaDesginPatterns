@@ -8,6 +8,8 @@ public class TreeTraversal {
         List<Integer> result = new ArrayList<>();
         Stack<BinaryTreeNode<Integer>> stack = new Stack<>();
         BinaryTreeNode<Integer> curr = root;
+        Queue<BinaryTreeNode<Integer>> queue = new LinkedList<>();
+
         while(!stack.empty() || curr != null) {
             if(curr != null) {
                 stack.push(curr);
