@@ -106,12 +106,12 @@ public class MaxProfit {
     }
 
     public static void main(String[] args) {
-        //List<Double> prices = new ArrayList<>(Arrays.asList(310.0,315.0,275.0,295.0,260.0,270.0,290.0,230.0,255.0,250.0));
-        //maxProfit(prices);
+        List<Double> prices = new ArrayList<>(Arrays.asList(310.0,315.0,275.0,295.0,260.0,270.0,290.0,230.0,255.0,250.0));
+        maxProfit(prices);
 
 
         //System.out.println(prices);
-       // buyAndSellStockTwice(prices);
+        buyAndSellStockTwice(prices);
 
         int[] pricesK = new int[] {310,315,275,295,260,270,290,230,255,250};
         System.out.println(maxProfit(pricesK, 3));

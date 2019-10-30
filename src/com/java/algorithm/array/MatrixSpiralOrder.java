@@ -69,6 +69,63 @@ public class MatrixSpiralOrder {
     }
 
 
+    public static List<Integer> spiralOrder(int[][] matrix) {
+
+        if(matrix == null || matrix.length == 0) {
+            return new ArrayList();
+        }
+
+
+
+        int rows = matrix.length;
+        int rowLength = 0;
+
+        for(int i = 0; i < rows; i++) {
+            if(matrix[i] == null || matrix[i].length == 0) {
+                return new ArrayList();
+            }
+
+            if(rowLength == 0) {
+                rowLength = matrix[i].length;
+                continue;
+            }
+
+            if(rowLength != matrix[i].length) {
+                return new ArrayList();
+            }
+
+        }
+
+        int cols = matrix[0].length;
+        int size = rows * cols;
+        int[][] SHIFT = new int[][]{ {0 , 1} , {1, 0} , {0, -1} , {-1 , 0} };
+        int x = 0, y = 0;
+        int dir = 0;
+        List<Integer> spiralOrder = new ArrayList<>();
+        for(int i = 0; i < size; i++) {
+            spiralOrder.add(matrix[x][y]);
+            matrix[x][y] = 0;
+            int nextX = x + SHIFT[dir][0];
+            int nextY = y + SHIFT[dir][1];
+
+            if(nextX < 0 || nextX >= rows
+                    || nextY < 0 || nextY >= cols
+                    || matrix[nextX][nextY] == 0) {
+
+                dir = (dir + 1) % 4;
+                nextX = x + SHIFT[dir][0];
+                nextY = y + SHIFT[dir][1];
+
+            }
+
+            x = nextX;
+            y  = nextY;
+
+        }
+
+        return spiralOrder;
+    }
+
     public static void main(String[] args) {
         List<List<Integer>> squareMatrix = new ArrayList<>();
         squareMatrix.add(new ArrayList<Integer>(Arrays.asList(1,2,3)));
@@ -76,5 +133,8 @@ public class MatrixSpiralOrder {
         squareMatrix.add(new ArrayList<Integer>(Arrays.asList(7,8,9)));
 
         System.out.println(matrixSpiralOrderDirection(squareMatrix));
+
+        int[][] matrix = new int[][] {{1,2,3,4},{4,5}};
+        System.out.println(spiralOrder(matrix));
     }
 }

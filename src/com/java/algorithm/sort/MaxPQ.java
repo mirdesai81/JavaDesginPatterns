@@ -128,8 +128,10 @@ public class MaxPQ<Key extends Comparable<Key>> {
         for(int i = 0; i < data.length; i++) {
             String item = data[i];
             if (!item.equals("-")) pq.insert(item);
-            else if (!pq.isEmpty()) System.out.print(pq.delMax() + " ");
+           // else if (!pq.isEmpty()) System.out.print(pq.delMax() + " ");
         }
+
+        System.out.println(pq.delMax());
         System.out.println("(" + pq.size() + " left on pq)");
     }
 }

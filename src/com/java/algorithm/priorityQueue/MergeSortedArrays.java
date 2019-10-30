@@ -34,26 +34,26 @@ public class MergeSortedArrays {
     }
 
     public static List<Integer> mergeSortedArrays(List<List<Integer>> sortedArrays) {
-        // list of iterator
         List<Iterator<Integer>> iters = new ArrayList<>(sortedArrays.size());
-        for(List<Integer> array : sortedArrays) {
-            iters.add(array.iterator());
+        for(List<Integer> sortedArray : sortedArrays) {
+            iters.add(sortedArray.iterator());
         }
 
-        PriorityQueue<ArrayEntry> minHeap = new PriorityQueue<>(sortedArrays.size(), Comparator.comparingInt(ArrayEntry::getValue));
-
-
-        for(int i = 0; i < iters.size(); i++) {
-            if(iters.get(i).hasNext())
+        PriorityQueue<ArrayEntry> minHeap = new PriorityQueue<>(sortedArrays.size(),(a1, a2) -> Integer.compare(a1.value,a2.value));
+        // Now add first entry from each iters to minHeap
+        for(int i = 0; i < iters.size();i++) {
+            if(iters.get(i).hasNext()) {
                 minHeap.add(new ArrayEntry(iters.get(i).next(),i));
+            }
         }
 
         List<Integer> result = new ArrayList<>();
         while(!minHeap.isEmpty()) {
             ArrayEntry entry = minHeap.poll();
-            result.add(entry.value);
-            if(iters.get(entry.arrayId).hasNext())  {
-                minHeap.add(new ArrayEntry(iters.get(entry.arrayId).next(),entry.arrayId));
+            result.add(entry.getValue());
+            Iterator<Integer> entryIter = iters.get(entry.getArrayId());
+            if(entryIter.hasNext()) {
+                minHeap.add(new ArrayEntry(entryIter.next(),entry.getArrayId()));
             }
         }
 

@@ -1,8 +1,10 @@
 package com.java.algorithm.stack;
 
 import com.java.algorithm.stack.ResizingArrayStack;
+import com.java.stdlib.StdOut;
 
 import java.util.Arrays;
+import java.util.Stack;
 
 /**
  * Created by mihir.desai on 1/25/2018.
@@ -63,6 +65,17 @@ public class ArrayStackTest {
         maxStack.pop();
         maxStack.pop();
         System.out.println("max - "+maxStack.max());
+
+        Stack<Integer> s= new Stack<>();
+        s.push(10);
+        s.push(2);
+        s.push(5);
+        s.push(23);
+        sort(s);
+        while(!s.isEmpty()) {
+            StdOut.print(s.pop() + " ");
+        }
+
 
     }
 
@@ -127,5 +140,22 @@ public class ArrayStackTest {
         }
 
         return buffer.isEmpty();
+    }
+
+    public static void sort(Stack<Integer> s) {
+        Stack<Integer> r = new Stack<>();
+        while(!s.isEmpty()) {
+            int tmp = s.pop();
+
+            while(!r.isEmpty() && r.peek() > tmp) {
+                s.push(r.pop());
+            }
+
+            r.push(tmp);
+        }
+
+        while(!r.isEmpty()) {
+            s.push(r.pop());
+        }
     }
 }

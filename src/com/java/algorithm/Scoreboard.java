@@ -3,7 +3,7 @@ package com.java.algorithm;
 /**
  * Created by mihir.desai on 1/22/2018.
  */
-public class                                            Scoreboard {
+public class Scoreboard {
     private int numOfEntries = 0;
     private GameEntry[] board;
 

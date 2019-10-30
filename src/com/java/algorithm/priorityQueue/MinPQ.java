@@ -15,8 +15,8 @@ public class MinPQ<Key extends Comparable<Key>> implements Iterable<Key> {
     }
 
     public MinPQ(int capacity) {
-        pq = (Key[]) new Object[capacity + 1];
-        n = 0;
+       pq = (Key[]) new Object[capacity + 1];
+       n = 0;
     }
 
     public MinPQ(int capacity,Comparator<Key> comparator) {
@@ -71,26 +71,32 @@ public class MinPQ<Key extends Comparable<Key>> implements Iterable<Key> {
     // helper function to double the size of the heap array
     private void resize(int capacity) {
         assert capacity > n;
-        Key[] temp = (Key[]) new Object[capacity];
-        for (int i = 1; i <= n; i++) {
+        Key[] temp = (Key[]) new Object[capacity + 1];
+        for(int i = 1; i <= n;i++) {
             temp[i] = pq[i];
         }
+
         pq = temp;
     }
 
+    /**
+     * n = 0 is not utilised so have to increment n first and then add
+     * @param k
+     */
     public void insert(Key k) {
-        if(n == pq.length - 1) {
-            resize(2 * pq.length);
-        }
-
-        pq[++n] = k;
-        swim(n);
-        assert isMinHeap();
+       if(n == pq.length - 1) resize(2 * pq.length);
+       pq[++n] = k;
+       swim(n);
+       assert isMinHeap();
     }
 
+    /**
+     * For swim we check if k/2 > k then do an exchange to move up so pq[1] is always minimum
+     * @param k
+     */
     private void swim(int k) {
-        while(k > 1 && greater(k/2, k)) {
-            exch(k, k/2);
+        while(k > 1 && greater(k/2,k)) {
+            exch(k/2, k);
             k = k/2;
         }
     }
@@ -98,24 +104,22 @@ public class MinPQ<Key extends Comparable<Key>> implements Iterable<Key> {
     public Key delMin() {
         if(isEmpty()) throw new NoSuchElementException("Priority Key underflow");
 
-        Key min = pq[1];
-        exch(1,n--);
+        Key key = pq[1];
+        exch(1,n);
+        pq[n--] = null;
         sink(1);
-        pq[n + 1] = null;
-        if(n > 0 && (n == (pq.length - 1)/4)) resize(pq.length/2);
         assert isMinHeap();
-        return min;
+
+        return key;
     }
 
     private void sink(int k) {
         while(2*k <= n) {
             int j = 2*k;
-            if(j < n && greater(j,j+1)) {
-                j++;
-            }
-
+            // check if right > left then increment j to compare
+            // 2*K and 2*K + 1 are left and right
+            if(j < n && greater(j, j + 1)) j++;
             if(!greater(k,j)) break;
-
             exch(k,j);
             k = j;
         }

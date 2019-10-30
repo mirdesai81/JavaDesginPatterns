@@ -8,22 +8,38 @@ import java.util.List;
 
 public class SearchMinInCyclicallySortedArray {
 
-    public static int searchMin(List<Integer> list) {
-        int left = 0;
-        int right = list.size() - 1;
+    public static int searchMin(List<Integer> A) {
+        int low = 0;
+        int high = A.size() - 1;
 
-        while(left < right) {
-            int mid = left + ((right - left) / 2);
-            if(list.get(mid) > list.get(right)) {
-                // sublist mid + 1 to right + 1
-                left = mid + 1;
+        while(low < high) {
+            int mid = low + (high - low)/2;
+            if(A.get(mid) > A.get(high)) {
+                low = mid + 1;
             } else {
-                // sublist left , mid + 1
-                right = mid;
+                high = mid;
             }
         }
 
-        return left;
+        return low;
+    }
+
+    public static int searchMax(List<Integer> A) {
+        int low = 0;
+        int high = A.size() - 1;
+
+        while(low < high) {
+            int mid = low + (high - low) / 2;
+            if(A.get(mid) > A.get(mid + 1) && A.get(mid) > A.get(mid - 1)) {
+                return mid;
+            } else if(A.get(mid) > A.get(mid + 1) && A.get(mid) < A.get(mid - 1)) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+
+        return low;
     }
 
 
@@ -33,7 +49,6 @@ public class SearchMinInCyclicallySortedArray {
 
         while(left <= right) {
             int mid = left + ((right - left) / 2);
-            StdOut.println(A.get(mid));
             Integer value = A.get(mid);
             if(value == k) {
                 return mid;
@@ -55,7 +70,10 @@ public class SearchMinInCyclicallySortedArray {
 
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>(Arrays.asList(378, 478, 550, 631, 103, 200, 220, 350));
-        //StdOut.println(searchMin(list));
+        StdOut.println(searchMin(list));
         StdOut.println(findK(list,103));
+
+        list = new ArrayList<>(Arrays.asList(378, 478, 550, 631,714,800, 350, 280, 220, 110));
+        StdOut.println(searchMax(list));
     }
 }

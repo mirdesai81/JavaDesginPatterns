@@ -720,6 +720,9 @@ public class BinarySearchTree<Key extends Comparable<Key>,Value> {
             i++;
         }
 
+
+        bst.delete('E');
+
         bst.preOrder();
         StdOut.println();
        bst.inOrder();
@@ -745,7 +748,7 @@ public class BinarySearchTree<Key extends Comparable<Key>,Value> {
         System.out.println("Rank of A - "+bst.rank('A'));
         System.out.println("Rank of X - "+bst.rank('X'));
         bst.height();
-        bst.delete('E');
+
     /*    System.out.println("Min key for BST - "+bst.min());
         System.out.println("Max key for BST - "+bst.max());
 

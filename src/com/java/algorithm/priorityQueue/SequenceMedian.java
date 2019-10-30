@@ -9,7 +9,10 @@ public class SequenceMedian {
     public static  List<Double> findMedianSequence(List<Integer> sequence) {
         Iterator<Integer> iter = sequence.iterator();
         List<Double> result = new ArrayList<>();
+        // store the larger half seen so far
         PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+
+        // store the smaller half seen so far
         PriorityQueue<Integer> maxHeap = new PriorityQueue<>(16,Collections.reverseOrder());
 
         while(iter.hasNext()) {
@@ -24,6 +27,9 @@ public class SequenceMedian {
                 }
             }
 
+            // Ensure minHeap and maxHeap have equal number of elements if
+            // an even number of elements is read; otherwise , minHeap must have
+            // one more element than maxHeap.
             if(minHeap.size() > maxHeap.size() + 1) {
                 maxHeap.add(minHeap.remove());
             } else if(maxHeap.size() > minHeap.size()) {

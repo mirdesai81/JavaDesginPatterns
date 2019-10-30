@@ -28,24 +28,31 @@ public class KLargestInBinaryHeap {
             return Collections.EMPTY_LIST;
         }
 
-        PriorityQueue<HeapEntry> candidateMaxHeap = new PriorityQueue<>(16,Compare.COMPARE_HEAP_ENTRIES);
-        candidateMaxHeap.add(new HeapEntry(0,A.get(0)));
+        PriorityQueue<HeapEntry> maxHeap = new PriorityQueue<>(16,(a, b) -> Integer.compare(b.value, a.value));
+        // always largest in the k largest;
+        maxHeap.add(new HeapEntry(0,A.get(0)));
         List<Integer> result = new ArrayList<>();
 
-        for(int i = 0; i < k;++i) {
-            Integer index = candidateMaxHeap.peek().index;
-            result.add(candidateMaxHeap.remove().index);
-            Integer leftIndex = 2*i + 1;
-            if(leftIndex < A.size()) {
-                candidateMaxHeap.add(new HeapEntry(leftIndex,A.get(leftIndex)));
+        for(int i = 0; i < k; i++) {
+            HeapEntry heapEntry = maxHeap.poll();
+            result.add(heapEntry.value);
+            int leftIdx = 2 * heapEntry.index + 1;
+            int rightIdx = 2 * heapEntry.index + 2;
+            if(leftIdx < A.size()) {
+                maxHeap.add(new HeapEntry(leftIdx,A.get(leftIdx)));
             }
 
-            Integer rightIndex = 2*i + 2;
-            if(rightIndex < A.size()) {
-                candidateMaxHeap.add(new HeapEntry(rightIndex,A.get(rightIndex)));
+            if(rightIdx < A.size()) {
+                maxHeap.add(new HeapEntry(rightIdx, A.get(rightIdx)));
             }
         }
 
         return result;
+    }
+
+    public static void main(String[] args) {
+        List<Integer> input = new ArrayList<>(Arrays.asList(561,314,401,28,156,359,271,11,3));
+        System.out.println(kLargestInBinaryHeap(input,6));
+
     }
 }

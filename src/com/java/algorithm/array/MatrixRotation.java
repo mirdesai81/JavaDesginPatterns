@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Mihir.Desai on 4/25/2018.
  */
-public class MatrixRotation {
+public class                                                                                                                                                                                                                                                                                                                                                                   MatrixRotation {
     public static void rotateMatrix(List<List<Integer>> squareMatrix) {
        final int matrixSize = squareMatrix.size() - 1;
 

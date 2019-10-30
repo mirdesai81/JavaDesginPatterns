@@ -123,8 +123,11 @@ public class LargeSubtract {
     }
 
     public static void main(String[] args) {
-        char[] num1 = getRandomNum();
-        char[] num2 = getRandomNum();
+        //char[] num1 = getRandomNum();
+        //char[] num2 = getRandomNum();
+
+        char[] num1 = new char[] {'1','2','4'};
+        char[] num2 = new char[] {'1','5', '7' , '8'};
         boolean[] isNegative = new boolean[]{false};
         printArray(num1);
         System.out.print(" - ");

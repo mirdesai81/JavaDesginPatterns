@@ -9,7 +9,7 @@ public class Anagrams {
 
     public static List<List<String>> findAnagrams(List<String> dictionary) {
 
-        Map<String,List<String>> sortedStringToAnagrams = new HashMap<>();
+        java.util.Map<String,List<String>> sortedStringToAnagrams = new HashMap<>();
 
         for(String s : dictionary) {
             char[] sortedArray = s.toCharArray();
@@ -32,7 +32,7 @@ public class Anagrams {
         }*/
 
         List<List<String>> anagramGroups = sortedStringToAnagrams.entrySet().stream().filter(entry -> entry.getValue().size() >= 2).
-                map(Map.Entry::getValue).collect(Collectors.toList());
+                map(java.util.Map.Entry::getValue).collect(Collectors.toList());
 
         return anagramGroups;
 

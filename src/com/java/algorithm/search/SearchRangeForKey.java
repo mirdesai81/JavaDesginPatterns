@@ -7,39 +7,44 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SearchRangeForKey {
-    public static List<Integer> findRangeOfK(List<Integer> list,int key) {
-        int left = 0;
-        int right = list.size() - 1;
+    public static List<Integer> findRangeOfK(List<Integer> A,int key) {
+        int low = 0;
+        int high = A.size() - 1;
         int lowRange = -1;
         int highRange = -1;
         List<Integer> result = new ArrayList<>();
-        while(left <= right) {
-            int mid = left + ((right - left) / 2);
-            if(list.get(mid) < key) {
-                left = mid + 1;
-            } else if(list.get(mid) == key) {
+
+        while(low <= high) {
+            int mid = low + ((high-low)/2);
+            if(A.get(mid) < key) {
+                low = mid + 1;
+            } else if(A.get(mid) == key) {
                 lowRange = mid;
-                right = mid - 1;
+                high = mid - 1;
             } else {
-                right = mid - 1;
+                high = mid - 1;
             }
         }
-
         result.add(lowRange);
-        right = list.size() - 1;
 
-        while(lowRange <= right) {
-            int mid = lowRange + ((right - lowRange) / 2);
-            if(list.get(mid) < key) {
-                lowRange = mid + 1;
-            } else if(list.get(mid) == key) {
+        if(lowRange == -1) {
+            result.add(highRange);
+            return result;
+        }
+
+        high = A.size() - 1;
+        low = lowRange + 1;
+        while(low <= high) {
+            int mid = low + ((high-low)/2);
+            if(A.get(mid) == key) {
                 highRange = mid;
-                lowRange = mid + 1;
+                low = mid + 1;
             } else {
-                right = mid - 1;
+                high = mid - 1;
             }
         }
         result.add(highRange);
+
 
         return result;
     }

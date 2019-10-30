@@ -5,7 +5,7 @@ public class FindMedianSortedArrays {
     private static double findMedianSortedArrays(int[] A, int[] B) {
 
         if(A.length > B.length) {
-            findMedianSortedArrays(B,A);
+            return findMedianSortedArrays(B,A);
         }
 
         int x = A.length;
@@ -50,8 +50,8 @@ public class FindMedianSortedArrays {
     }
 
     public static void main(String[] args) {
-        int[] A = {1,3,8,9,15};
-        int[] B = {7,11,19,21,18,25};
+        int[] A = {1,2,3,5,6};
+        int[] B = {};
 
         System.out.println(FindMedianSortedArrays.findMedianSortedArrays(A,B));
     }

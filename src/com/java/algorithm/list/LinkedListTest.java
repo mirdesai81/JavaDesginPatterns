@@ -5,6 +5,10 @@ package com.java.algorithm.list;
  */
 
 import com.java.algorithm.list.LinkedStack.Node;
+
+import java.util.HashSet;
+import java.util.Stack;
+
 public class LinkedListTest {
 
     public static void main(String args[]) {
@@ -84,8 +88,8 @@ public class LinkedListTest {
         Node head = test.reverseAltKNodes(stack1.getFirst(),2);
         System.out.println("After calling reverse alternate 2 nodes - " + test.getItems(head));
 
-       /* Node sortedList = test.mergeSort(head);
-        System.out.println("After calling merge sort - " + test.getItems(sortedList));*/
+        Node sortedList = test.mergeSort(head);
+        System.out.println("After calling merge sort - " + test.getItems(sortedList));
 
         stack1 = new LinkedStack<>();
         stack1.addLast(1);
@@ -174,31 +178,6 @@ public class LinkedListTest {
 
         stack1 = new LinkedStack<>();
         stack1.addLast(1);
-        stack1.addLast(1);
-        stack1.addLast( 1);
-        stack1.addLast(4);
-        stack1.addLast(4);
-        stack1.addLast(6);
-        System.out.println("List before removing duplicates : "+test.getItems(stack1.getFirst()));
-
-        Node nodes = test.removeDuplicatesFromSortedList(stack1.getFirst(),3);
-        System.out.println("List after removing duplicates : "+test.getItems(nodes));
-
-
-        stack1 = new LinkedStack<>();
-        stack1.addLast(1);
-        stack1.addLast(1);
-        stack1.addLast( 4);
-        stack1.addLast(4);
-        stack1.addLast(4);
-        stack1.addLast(6);
-        System.out.println("List before removing duplicates : "+test.getItems(stack1.getFirst()));
-
-        nodes = test.removeDuplicatesFromSortedList(stack1.getFirst(),3);
-        System.out.println("List after removing duplicates : "+test.getItems(nodes));
-
-        stack1 = new LinkedStack<>();
-        stack1.addLast(1);
         stack1.addLast(2);
         stack1.addLast( 3);
         stack1.addLast(4);
@@ -206,7 +185,7 @@ public class LinkedListTest {
         stack1.addLast(6);
         System.out.println("List before right shift: "+test.getItems(stack1.getFirst()));
 
-        nodes = test.cyclicallyRightShift(stack1.getFirst(),5);
+        Node nodes = test.cyclicallyRightShift(stack1.getFirst(),5);
         System.out.println("List after right shift : "+test.getItems(nodes));
 
         stack1 = new LinkedStack<>();
@@ -270,6 +249,26 @@ public class LinkedListTest {
         nodes = test.addTwoNumbers(stack1.getFirst(),stack2.getFirst());
         System.out.println("List after addition: "+test.getItems(nodes));
 
+
+        stack1 = new LinkedStack<>();
+        stack1.addLast(10);
+        stack1.addLast(2);
+        stack1.addLast( 3);
+        stack1.addLast(2);
+        stack1.addLast(5);
+        stack1.addLast(2);
+        test.deleteDuplicatesWithoutBuffer(stack1.getFirst());
+        System.out.println("Remove duplicates for unsorted list without buffer : "+test.getItems(stack1.getFirst()));
+
+        stack1 = new LinkedStack<>();
+        stack1.addLast(10);
+        stack1.addLast(2);
+        stack1.addLast( 3);
+        stack1.addLast(2);
+        stack1.addLast(5);
+        stack1.addLast(2);
+        test.deleteDuplicates(stack1.getFirst());
+        System.out.println("Remove duplicates for unsorted list : "+test.getItems(stack1.getFirst()));
 
 
     }
@@ -423,8 +422,7 @@ public class LinkedListTest {
             return a;
         }
 
-        Node result = a;
-        Node head = result;
+        Node head = a;
         //result.setNext(null);
         int k = 1;
         while(k++ < start) {
@@ -492,7 +490,7 @@ public class LinkedListTest {
         }
 
         count = 0;
-        while(count > k - 1 && curr != null) {
+        while(count < k - 1 && curr != null) {
             curr = curr.next;
             count++;
         }
@@ -646,8 +644,10 @@ public class LinkedListTest {
         Node newFirst = oldFirst.next;
         // split into two list by setting oldFirst.next to null of first subList
         oldFirst.next = null;
-        // Move oldFirst to first head Node
+        // Move oldFirst to first head FNode
         oldFirst = first;
+
+
 
         // Now you have two subList
         Node t1 = mergeSort(oldFirst);
@@ -979,8 +979,7 @@ public class LinkedListTest {
         Node even = first.next;
         Node evenHead = even;
         while(true) {
-            if(odd == null ||
-                    even == null ||
+            if(even == null ||
                     even.next == null) {
                 odd.next = evenHead;
                 break;
@@ -995,7 +994,7 @@ public class LinkedListTest {
             // even = odd.next
             if(odd.next == null) {
                 even.next = null;
-                odd.next = even.next;
+                odd.next = even;
                 break;
             }
 
@@ -1140,5 +1139,71 @@ public class LinkedListTest {
 
 
         return reverse(head);
+    }
+
+    public void deleteDuplicatesWithoutBuffer(Node head) {
+        Node curr = head;
+
+        while(curr != null) {
+            Node runner = curr;
+
+            while(runner.next != null) {
+                if(runner.next.item.compareTo(curr.item) == 0) {
+                    runner.next = runner.next.next;
+                } else {
+                    runner = runner.next;
+                }
+            }
+
+            curr = curr.next;
+        }
+
+    }
+
+    public void deleteDuplicates(Node head) {
+        Node curr = head;
+        HashSet<Integer> set = new HashSet<Integer>();
+        Node prev = null;
+
+        while(curr != null) {
+            if(set.contains((Integer)curr.item) && prev != null) {
+                prev.next = curr.next;
+            } else {
+                set.add((Integer)curr.item);
+                prev = curr;
+            }
+
+            curr = curr.next;
+        }
+
+    }
+
+    public boolean checkIsPalindrome(Node first) {
+        Node slow = first;
+        Node fast = first;
+        Stack<Integer> stack = new Stack<>();
+
+        while(fast != null && fast.next != null) {
+            stack.add((Integer)slow.item);
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // if odd number of elements then skip middle
+        if(fast != null) {
+            slow = slow.next;
+        }
+
+        while(slow != null) {
+            Integer top = stack.pop();
+
+            if(((Integer)slow.item).compareTo(top) != 0) {
+                return false;
+            }
+
+            slow = slow.next;
+        }
+
+        return true;
     }
 }

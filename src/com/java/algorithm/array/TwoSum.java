@@ -1,7 +1,8 @@
 package com.java.algorithm.array;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.java.stdlib.StdOut;
+
+import java.util.*;
 
 /*
 Given nums = [2, 7, 11, 15], target = 9,
@@ -11,23 +12,24 @@ return [0, 1].
  */
 public class TwoSum {
 
-    public static int[] twoSum(int[] nums, int target) {
+    public static List<List<Integer>> twoSum(int[] nums, int target) {
         Map<Integer,Integer> lookup = new HashMap<>();
+        List<List<Integer>> result = new ArrayList<>();
         for(int i = 0; i < nums.length;i++) {
             int diff = target - nums[i];
             if(lookup.containsKey(diff)) {
-                return new int[] {lookup.get(diff) , i};
+                result.add(Arrays.asList(lookup.get(diff) , i));
             }
             lookup.put(nums[i],i);
         }
 
-        throw new IllegalArgumentException("No two sum solution");
+        return result;
     }
 
     public static void main(String[] args) {
-        int[] nums = {2,7,11,-15};
+        int[] nums = {2,7,11,-15,10,-14};
         ArrayUtils.print("Before",nums);
-        int[] result = TwoSum.twoSum(nums,-4);
-        ArrayUtils.print("Result of Two Sum",result);
+       // int[] result = TwoSum.twoSum(nums,-4);
+        StdOut.println("Result of Two Sum" + TwoSum.twoSum(nums,-4));
     }
 }

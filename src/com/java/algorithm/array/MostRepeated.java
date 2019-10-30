@@ -43,7 +43,7 @@ public class MostRepeated {
     }
 
     public static void main(String[] args) {
-        int[] a = {2, 4, 0, 5, 2, 1, 9, 9, 8, 4, 9, 7};
+        int[] a = {2, 4, 0, 5, 2, 1, 9, 9, 8, 4};
         int k = 10; /*The value of all numbers in the array are less than k and k <= n*/
 
         System.out.print("Input : ");
