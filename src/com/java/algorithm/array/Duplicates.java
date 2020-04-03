@@ -55,8 +55,7 @@ public class Duplicates {
             throw new IllegalArgumentException("Either input is empty or number of duplicates is greater than input size");
         }
 
-        int min = Math.min(2, m);
-        int writeIndex = min;
+        int writeIndex = 1;
         int duplicateCount = 1;
 
         for(int i = writeIndex; i < input.size();++i) {
@@ -64,7 +63,7 @@ public class Duplicates {
                 duplicateCount = 1; // reset duplicate count to 1 since element is unique
                 input.set(writeIndex++,input.get(i));
             } else {
-                if(duplicateCount < min) {
+                if(duplicateCount < m) {
                     duplicateCount++;
                     input.set(writeIndex++,input.get(i));
                 }
@@ -89,7 +88,7 @@ public class Duplicates {
         System.out.println(deleteElement(input,5));
 
         input = new ArrayList<>(Arrays.asList(2,3,5,5,5,7,11,11,11,13));
-        System.out.println(limitDuplicatesInSortedArray(input,1));
+        System.out.println(limitDuplicatesInSortedArray(input,2));
 
     }
 }

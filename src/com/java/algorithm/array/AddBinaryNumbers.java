@@ -29,16 +29,16 @@ public class AddBinaryNumbers {
 
         sb = new StringBuilder();
         char carry = '0';
-        int i = a.length();
+        int i = a.length() - 1;
 
-        while(i > 0) {
+        while(i >= 0) {
             // both are either '0' or '1'
-            if(a.charAt(i-1) == b.charAt(i-1)) {
+            if(a.charAt(i) == b.charAt(i)) {
                 // always append carry for '1' or '0'
                 sb.append(carry);
 
                 // if both are '1' then carry is '1'
-                if(a.charAt(i-1) == '1') {
+                if(a.charAt(i) == '1') {
                     carry = '1';
                 } else {
                     carry = '0';

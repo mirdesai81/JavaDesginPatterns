@@ -5,7 +5,8 @@ import java.util.*;
 /**
  * Created by mihir.desai on 4/5/2018.
  */
-public class MaxProfit {
+public class
+MaxProfit {
     public static double maxProfit(List<Double> prices) {
       double maxProfit = 0.0;
       double minSoFar = Double.MAX_VALUE;

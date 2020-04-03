@@ -20,10 +20,11 @@ public class ReplaceAndRemove {
 
         String data = String.format("WriteIdx %d, aCount %d",writeIndex,aCount);
         System.out.println(data);
+        writeIndex = writeIndex - 1;
         // curIdx is before writeIndx where last element was written and then writeIndex was incremented
-        int curIdx = writeIndex - 1;
+        int curIdx = writeIndex;
         // since last writeIndex was already incremented to reset we decrement by 1 from current writeIndex and add aCount for final write to happen
-        writeIndex = writeIndex + aCount - 1;
+        writeIndex = writeIndex + aCount;
         int finalSize = writeIndex + 1;
 
         while(curIdx >= 0) {

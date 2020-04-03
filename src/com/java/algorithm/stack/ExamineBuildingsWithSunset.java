@@ -28,7 +28,8 @@ public class ExamineBuildingsWithSunset {
 
         while(sequence.hasNext()) {
             Integer height = sequence.next();
-            // comapre the height with exisiting and if existing has greater or equal height then keep removing the buildings from end
+            // compare the height with exisiting in stack and if current height is greater than keep removing smaller height from stack
+            // since it blocks the building
             while(!buildingWithSunsetView.isEmpty() &&
                     Integer.compare(height,buildingWithSunsetView.peek().height) >= 0) {
                 // keep removing

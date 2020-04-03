@@ -24,8 +24,9 @@ public class PhoneMnemonics {
             mnemonic.add(new String(partialMnemonic));
         } else {
 
-            for(int i = 0; i < MAPPING[phoneNumber.charAt(digit) - '0'].length(); ++i) {
-                char c = MAPPING[phoneNumber.charAt(digit) - '0'].charAt(i);
+            String value = MAPPING[phoneNumber.charAt(digit) - '0'];
+            for(int i = 0; i < value.length(); ++i) {
+                char c = value.charAt(i);
                 partialMnemonic[digit] = c;
                 phoneMnemonicHelper(phoneNumber,digit + 1,partialMnemonic,mnemonic);
             }

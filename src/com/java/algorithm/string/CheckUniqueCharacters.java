@@ -44,7 +44,7 @@ public class CheckUniqueCharacters {
         char[] strArray = str.toCharArray();
         Arrays.sort(strArray);
 
-        for(int i = 0; i < str.length(); i++) {
+        for(int i = 0; i < str.length() - 1; i++) {
            if(strArray[i] == strArray[i + 1]) {
                return false;
            }
@@ -59,6 +59,6 @@ public class CheckUniqueCharacters {
         System.out.println(checkUniqueCharacters("abcdefghijk"));
 
         System.out.println(checkUniqueCharactersWithCountArray("Abcdefghijka"));
-        System.out.println(checkUniqueCharactersWithSort("abcdefghijka"));
+        System.out.println(checkUniqueCharactersWithSort("abcdefghijkl"));
     }
 }

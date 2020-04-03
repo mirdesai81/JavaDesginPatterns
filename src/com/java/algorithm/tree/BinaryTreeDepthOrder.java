@@ -151,6 +151,18 @@ public class BinaryTreeDepthOrder {
         return depth > 0 ? depth - 1 : 1;
     }
 
+    public static int maxDepthRecursive(BinaryTreeNode<Integer> root) {
+        if(root == null) return 0;
+
+        if(root.left == null && root.right == null) return 1;
+
+        if(root.left == null) return maxDepthRecursive(root.right) + 1;
+
+        if(root.right == null) return maxDepthRecursive(root.left) + 1;
+
+        return Math.max(maxDepthRecursive(root.left),maxDepthRecursive(root.right)) + 1;
+    }
+
     public static void main(String[] args) {
         BinaryTreeNode<Integer> parent = new BinaryTreeNode<>(314);
         parent.setLeft(new BinaryTreeNode<>(6));
@@ -182,6 +194,8 @@ public class BinaryTreeDepthOrder {
         System.out.println(binaryTreeDepthOrderBottomUp(parent));
 
         StdOut.println("MAX Dept of BST - "+maxDepth(parent));
+        StdOut.println("MAX Dept of BST - "+maxDepthRecursive(parent));
+
         StdOut.println("MIN Dept of BST - "+minDepth(parent));
 
     }

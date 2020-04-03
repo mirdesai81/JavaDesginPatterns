@@ -7,32 +7,26 @@ import java.util.Arrays;
  */
 public class ReplaceSpace {
     public static String replaceSpace(String s, String t) {
-        int num = 0;
-        for(int i = 0 ; i < s.length(); ++i) {
+        int n = s.length();
+        int count = 0;
+        for(int i = 0; i < n; i++) {
             if(s.charAt(i) == ' ') {
-                num++;
+                count++;
             }
         }
 
-        int oldLength = s.length();
-        int newLength = oldLength + ((t.length() - 1) * num);
-        char[] strArray = Arrays.copyOf(s.toCharArray(),newLength);
+        int len = (n - count) + count*3;
+        StringBuilder result = new StringBuilder(len);
 
-        int writeIndex = newLength - 1;
-        int i = oldLength - 1;
-
-        while(i >= 0) {
-            if(strArray[i] == ' ') {
-                for(int j = t.length() - 1; j >= 0; j--) {
-                    strArray[writeIndex--] = t.charAt(j);
-                }
+        for(int i = 0; i < n; i++) {
+            if(s.charAt(i) != ' ') {
+                result.append(s.charAt(i));
             } else {
-                strArray[writeIndex--] = strArray[i];
+                result.append(t);
             }
-            --i;
         }
 
-        return new String(strArray,0,newLength);
+        return result.toString();
     }
 
     public static void main(String[] args) {

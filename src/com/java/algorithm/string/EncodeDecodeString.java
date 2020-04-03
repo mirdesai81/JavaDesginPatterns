@@ -10,6 +10,7 @@ public class EncodeDecodeString {
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < s.length();++i){
             if(Character.isDigit(s.charAt(i))) {
+
                 count = count * 10 + s.charAt(i) - '0';
             } else {
                 while(count > 0) {

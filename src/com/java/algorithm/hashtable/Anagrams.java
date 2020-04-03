@@ -5,7 +5,7 @@ import com.java.stdlib.StdOut;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Anagrams {
+public class  Anagrams {
 
     public static List<List<String>> findAnagrams(List<String> dictionary) {
 

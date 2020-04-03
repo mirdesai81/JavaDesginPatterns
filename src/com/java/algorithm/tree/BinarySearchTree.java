@@ -711,7 +711,7 @@ public class BinarySearchTree<Key extends Comparable<Key>,Value> {
     }
 
     public static void main(String[] args) {
-        BinarySearchTree<Character,Integer> bst = new BinarySearchTree<>();
+       /* BinarySearchTree<Character,Integer> bst = new BinarySearchTree<>();
         String inputStr = "SEARCHEXAMPLE";
         char[] inputData = inputStr.toCharArray();
         int i = 1;
@@ -747,7 +747,7 @@ public class BinarySearchTree<Key extends Comparable<Key>,Value> {
         System.out.println("Rank of M - "+bst.rank('M'));
         System.out.println("Rank of A - "+bst.rank('A'));
         System.out.println("Rank of X - "+bst.rank('X'));
-        bst.height();
+        bst.height();*/
 
     /*    System.out.println("Min key for BST - "+bst.min());
         System.out.println("Max key for BST - "+bst.max());
@@ -786,10 +786,32 @@ public class BinarySearchTree<Key extends Comparable<Key>,Value> {
             StdOut.println(s + " " + bst.get(s));
         }*/
 
-        for(Character s : bst.IterativeKeys('X','Z')) {
+        /*for(Character s : bst.IterativeKeys('X','Z')) {
             StdOut.println(s + " " + bst.get(s));
         }
 
-        StdOut.println("Height of tree - "+ bst.height());
+        StdOut.println("Height of tree - "+ bst.height());*/
+
+
+        BinarySearchTree<Integer,Integer> bst = new BinarySearchTree<>();
+
+        int[] inputData = new int[] {15,10,18,8, 11,16,20,19,21};
+        int i = 1;
+        for(int c : inputData) {
+            bst.put(c,i);
+            i++;
+        }
+
+        for(Integer x : bst.levelOrder()) {
+            StdOut.print(x+" ");
+        }
+
+
+
+      /*  StdOut.println("Select(0) - "+bst.select(0));
+
+        bst.delete(18);*/
+
+
     }
 }

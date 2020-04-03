@@ -23,7 +23,7 @@ public class PaintMatrix {
                 return false;
             }
 
-            SearchMaze.Coordinate that = (SearchMaze.Coordinate) o;
+            Coordinate that = (Coordinate) o;
 
             return this.x == that.x && this.y == that.y;
         }
