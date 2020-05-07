@@ -16,18 +16,29 @@ public class QueueUsingStack {
     }
 
     public Integer dequeue() {
-        if(deq.isEmpty()) {
-            while(!enq.isEmpty()) {
-                // pop all enq elements and store in deq
-                deq.push(enq.pop());
-            }
-        }
-
+        moveElements();
         if(!deq.isEmpty()) {
             return deq.pop();
         }
 
         throw new NoSuchElementException("Cannot pop empty queue");
+    }
+
+    public Integer peek() {
+        moveElements();
+        if(!deq.isEmpty()) {
+            return deq.peek();
+        }
+
+        throw new NoSuchElementException("Cannot peek empty queue");
+    }
+
+    private void moveElements() {
+        if(deq.isEmpty()) {
+            while(!enq.isEmpty()) {
+                deq.push(enq.pop());
+            }
+        }
     }
 
     public static void main(String[] args) {
