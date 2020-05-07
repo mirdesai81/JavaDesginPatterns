@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class                                                                                                                                                                                                                                                                                                                                                                   MatrixRotation {
     public static void rotateMatrix(List<List<Integer>> squareMatrix) {
-       final int matrixSize = squareMatrix.size() - 1;
+      /* final int matrixSize = squareMatrix.size() - 1;
 
        for(int i = 0; i < squareMatrix.size()/2;++i) {   // i = 0 and 1
            for(int j = i; j < matrixSize - i; j++) { // for i = 0; j = 0 , 1 ,2   for i = 1; j = 1
@@ -29,7 +29,26 @@ public class                                                                    
                squareMatrix.get(matrixSize - j).set(i , temp2);
 
            }
-       }
+       }*/
+
+      int n = squareMatrix.size();
+
+      for(int layer = 0; layer < n /2; layer++) {
+          int first = layer;
+          int last = n - 1 - layer;
+
+          for(int i = first; i < last; i++) {
+              int offset = i - first;
+
+
+              int top = squareMatrix.get(first).get(i);
+              squareMatrix.get(first).set(i,squareMatrix.get(last - offset).get(first));
+              squareMatrix.get(last - offset).set(first,squareMatrix.get(last).get(last-offset));
+              squareMatrix.get(last).set(last-offset , squareMatrix.get(i).get(last));
+              squareMatrix.get(i).set(last,top);
+          }
+      }
+
     }
 
     public static void main(String[] args) {
