@@ -63,6 +63,10 @@ public class HeightBalancedTree {
     }
 
 
+    public boolean isBalanced(BinaryTreeNode<String> tree) {
+
+    }
+
     public static void main(String[] args) {
         BinaryTreeNode<String> root = new BinaryTreeNode<String>("A");
         //left

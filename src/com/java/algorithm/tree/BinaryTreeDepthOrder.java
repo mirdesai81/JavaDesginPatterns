@@ -9,31 +9,32 @@ import java.util.Queue;
 public class BinaryTreeDepthOrder {
 
     public static List<List<Integer>> binaryTreeDepthOrder(BinaryTreeNode<Integer> tree) {
-        List<List<Integer>> result = new ArrayList<>();
-        Queue<BinaryTreeNode<Integer>> currDepthNodes = new LinkedList<BinaryTreeNode<Integer>>();
-        currDepthNodes.add(tree);
+       List<List<Integer>> result = new ArrayList<>();
 
-        while(!currDepthNodes.isEmpty()) {
-            Queue<BinaryTreeNode<Integer>> nextDepthNodes = new LinkedList<BinaryTreeNode<Integer>>();
-            List<Integer> thisLevel = new ArrayList<>();
-            while(!currDepthNodes.isEmpty()) {
-                BinaryTreeNode<Integer> currNode = currDepthNodes.poll();
-                if(currNode != null) {
-                    thisLevel.add(currNode.getData());
+       Queue<BinaryTreeNode<Integer>> currLevel = new LinkedList<>();
+       currLevel.add(tree);
 
-                    nextDepthNodes.add(currNode.getLeft());
-                    nextDepthNodes.add(currNode.getRight());
-                }
-            }
+       while(!currLevel.isEmpty()) {
+           Queue<BinaryTreeNode<Integer>> nextLevel = new LinkedList<>();
+           List<Integer> thisLevel = new ArrayList<>();
 
-            if(!thisLevel.isEmpty()) {
-                result.add(thisLevel);
-            }
+           while (!currLevel.isEmpty()) {
+               BinaryTreeNode<Integer> currNode = currLevel.poll();
+               if(currNode != null) {
+                   thisLevel.add(currNode.data);
+                   nextLevel.add(currNode.getLeft());
+                   nextLevel.add(currNode.getRight());
+               }
+           }
 
-            currDepthNodes = nextDepthNodes;
-        }
+           if(!thisLevel.isEmpty()) {
+               result.add(thisLevel);
+           }
 
-        return result;
+           currLevel = nextLevel;
+       }
+
+       return result;
     }
 
     public static List<List<Integer>> binaryTreeDepthOrderAlt(BinaryTreeNode<Integer> tree) {
