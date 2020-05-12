@@ -3,6 +3,8 @@ package com.java.algorithm.string;
 import com.java.stdlib.StdOut;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.java.algorithm.string.StringPermutation.getPerms;
 
@@ -51,6 +53,39 @@ public class StringPermutation {
         }
     }
 
+    public static ArrayList<String> permutationWithDuplicates(String str) {
+        ArrayList<String> result = new ArrayList<>();
+        HashMap<Character, Integer> map = freqTable(str);
+        getPerms(map,"",str.length(),result);
+        return result;
+    }
+
+    public static void getPerms(Map<Character,Integer> map,String prefix,int remaining,ArrayList<String> result) {
+        if(remaining == 0) {
+            result.add(prefix);
+            return;
+        }
+
+        for( Character key : map.keySet()) {
+            int count = map.get(key);
+            if(count > 0) {
+                map.put(key,count - 1);
+                getPerms(map,prefix + key,remaining - 1,result);
+                map.put(key,count);
+            }
+        }
+    }
+
+    public static HashMap<Character, Integer> freqTable(String str) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        for(int i = 0; i < str.length(); i++) {
+            Character c = str.charAt(i);
+            map.put(c,map.getOrDefault(c,0) + 1);
+        }
+
+        return map;
+    }
+
     private static String insertCharAt(String word,char first,int index) {
         String start = word.substring(0,index);
         String end = word.substring(index);
@@ -61,5 +96,6 @@ public class StringPermutation {
     public static void main(String[] args) {
         StdOut.println(permutation("abcd"));
         StdOut.println(permutationEfficient("abcd"));
+        StdOut.println(permutationWithDuplicates("aaa"));
     }
 }
