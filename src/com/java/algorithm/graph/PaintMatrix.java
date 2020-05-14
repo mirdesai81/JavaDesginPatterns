@@ -5,6 +5,9 @@ import com.java.stdlib.StdOut;
 import java.util.*;
 
 public class PaintMatrix {
+
+    enum Color {White,Black}
+
     public static class Coordinate {
         public int x,y;
 
@@ -66,6 +69,33 @@ public class PaintMatrix {
 
     }
 
+    public static void paintMatrixColor(List<List<Color>> A,int x,int y,Color nColor) {
+        A.get(x).set(y,nColor);
+        Queue<Coordinate> queue = new LinkedList<>();
+        queue.add(new Coordinate(x,y));
+        int[][] dirs = new int[][] { {0,1} , {0 , -1} , {1 , 0} , {-1 , 0}};
+        while(!queue.isEmpty()) {
+            Coordinate curr = queue.peek();
+            for(int[] dir : dirs) {
+                Coordinate next = new Coordinate(curr.x + dir[0], curr.y + dir[1]);
+
+                if(canChangeColor(A,next,nColor)) {
+                   A.get(next.x).set(next.y, nColor);
+                   queue.add(next);
+                }
+            }
+
+            queue.remove(curr);
+        }
+
+    }
+
+    private static boolean canChangeColor(List<List<Color>> A,Coordinate next,Color nColor) {
+        return next.x >= 0 && next.x < A.size()
+                && next.y >= 0 && next.y < A.get(0).size()
+                && !A.get(next.x).get(next.y).equals(nColor);
+    }
+
     private static boolean canFlip(Coordinate cur, List<List<Boolean>> A,boolean color) {
         return cur.x >= 0 && cur.x < A.size()
                 && cur.y >= 0 && cur.y < A.get(cur.x).size()
@@ -82,6 +112,18 @@ public class PaintMatrix {
         paintMatrix(A,2,1);
 
         StdOut.println(A);
+
+
+        List<List<Color>> screen = new ArrayList<>();
+        screen.add(new ArrayList<>(Arrays.asList(Color.White , Color.Black, Color.White, Color.White)));
+        screen.add(new ArrayList<>(Arrays.asList(Color.White ,Color.Black , Color.Black, Color.White)));
+        screen.add(new ArrayList<>(Arrays.asList(Color.White , Color.White, Color.Black, Color.White)));
+        screen.add(new ArrayList<>(Arrays.asList(Color.White , Color.White, Color.Black, Color.Black)));
+
+        paintMatrixColor(screen,2,1,Color.Black);
+
+        StdOut.println(screen);
+
 
     }
 
