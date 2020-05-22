@@ -7,7 +7,7 @@ public class ZeroMatrix {
     public static void updateMatrix(int[][] m) {
         boolean row_flag = false;
         boolean col_flag = false;
-        List<List<Integer>> rowColIdList = new ArrayList<>();
+
         for(int i = 0; i < m.length; i++) {
             for(int j = 0; j < m[0].length; j++) {
                 if(i == 0 && m[i][j] == 0) {
