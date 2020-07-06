@@ -22,9 +22,9 @@ public class ExamineBuildingsWithSunset {
         }
     }
 
-    public static Stack<BuildingWithHeight> examineBuildingsWithSunset(Iterator<Integer> sequence) {
+    public static java.util.Stack<BuildingWithHeight> examineBuildingsWithSunset(Iterator<Integer> sequence) {
         int id = 0;
-        Stack<BuildingWithHeight> buildingWithSunsetView = new Stack<>();
+        java.util.Stack<BuildingWithHeight> buildingWithSunsetView = new java.util.Stack<>();
 
         while(sequence.hasNext()) {
             Integer height = sequence.next();
@@ -44,13 +44,13 @@ public class ExamineBuildingsWithSunset {
         return buildingWithSunsetView;
     }
 
-    public static Stack<BuildingWithHeight> examineBuildingsWithSunsetWestToEast(Iterator<Integer> sequence) {
+    public static java.util.Stack<BuildingWithHeight> examineBuildingsWithSunsetWestToEast(Iterator<Integer> sequence) {
         int id = 0;
-        Stack<BuildingWithHeight> buildingWithSunsetView = new Stack<>();
+        java.util.Stack<BuildingWithHeight> buildingWithSunsetView = new java.util.Stack<>();
 
         while(sequence.hasNext()) {
             Integer height = sequence.next();
-            // if stack is empty or curr height is greater than first element of stack then push
+            // if java.util.Stack is empty or curr height is greater than first element of java.util.Stack then push
             if(buildingWithSunsetView.isEmpty() ||
                     Integer.compare(height,buildingWithSunsetView.peek().height) > 0) {
                 buildingWithSunsetView.push(new BuildingWithHeight(id++,height));
