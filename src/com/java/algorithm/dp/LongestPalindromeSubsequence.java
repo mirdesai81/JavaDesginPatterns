@@ -4,7 +4,7 @@ import com.java.stdlib.StdOut;
 
 public class LongestPalindromeSubsequence {
 
-    public static int longestPalindromeSubsequence(String A) {
+   /* public static int longestPalindromeSubsequence(String A) {
         int[][] result = new int[A.length()][A.length()];
         for(int i = 0; i < A.length(); i++) {
             result[i][i] = 1;
@@ -25,6 +25,27 @@ public class LongestPalindromeSubsequence {
 
         return result[0][A.length() - 1];
     }
+*/
+
+    public static int longestPalindromeSubsequence(String A) {
+        int n = A.length();
+        int[][] memo = new int[n + 1][n + 1];
+        String B = new StringBuilder(A).reverse().toString();
+
+        for(int i = 1; i <= n; i++) {
+            for(int j = 1; j <= n; j++) {
+                if(A.charAt(i - 1) == B.charAt(j - 1)) {
+                    memo[i][j] = 1 + memo[i - 1][j - 1];
+                } else {
+                    memo[i][j] = Math.max(memo[i - 1][j],memo[i][j - 1]);
+                }
+            }
+        }
+
+        return memo[n][n];
+    }
+
+
 
     public static int numOfCharactersToDeleteToFormPalindrome(String s) {
         return s.length() - longestPalindromeSubsequence(s);
