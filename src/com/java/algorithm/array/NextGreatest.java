@@ -19,6 +19,8 @@ public class NextGreatest {
         print(a);
     }
 
+
+
     private static void print(int a[]) {
         for(int i = 0; i < a.length;++i) {
             if(i == a.length - 1) {

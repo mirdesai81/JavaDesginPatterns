@@ -31,7 +31,7 @@ public class                                                                    
            }
        }*/
 
-      int n = squareMatrix.size();
+     int n = squareMatrix.size();
 
       for(int layer = 0; layer < n /2; layer++) {
           int first = layer;
@@ -48,6 +48,7 @@ public class                                                                    
               squareMatrix.get(i).set(last,top);
           }
       }
+
 
     }
 

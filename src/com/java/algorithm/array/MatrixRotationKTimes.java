@@ -35,6 +35,7 @@ public class MatrixRotationKTimes {
         while(col < size/2) {
             row = col;
             int temp = m[row][col];
+            int start = col;
 
             // always starts from 1st element of each cycle and end at 2nd last element
             while(row < endIndex - 1) {
@@ -47,16 +48,16 @@ public class MatrixRotationKTimes {
             } // col = size - 1
 
             // go up
-            int offset = size - endIndex;
+           /* int offset = size - endIndex;*/
 
             // move from size - 1 to initial
-            while(row > offset) {
+            while(row > start) {
                 m[row][col] = m[--row][col];
             }
 
 
             // move from size - 1 to initial + 1
-            while(col > offset + 1) {
+            while(col > start + 1) {
                 m[row][col] = m[row][--col];
             } // col = 1
 
