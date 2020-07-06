@@ -4,8 +4,6 @@ import com.java.stdlib.StdOut;
 
 import java.util.*;
 
-import static com.java.algorithm.graph.SearchMaze.searchMazeHelper;
-
 public class SearchMaze {
     public static class Coordinate {
         public int x,y;
