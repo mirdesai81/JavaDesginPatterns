@@ -5,6 +5,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class CSVReader {
+    /**
+     * 
+     * @param file
+     * @return
+     * @throws IOException
+     */
     public static List<String> readData(String file) throws IOException {
         List<String> data = new LinkedList<>();
         InputStream in;
